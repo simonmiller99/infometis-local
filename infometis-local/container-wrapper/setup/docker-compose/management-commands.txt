@@ -1,0 +1,27 @@
+# Instantiate the stack detached from log output
+docker-compose up -d
+
+# Output the container logs and follow
+docker-compose logs -f
+
+# Output the container logs and follow for a specific container
+docker-compose logs -f streamsets
+
+# Terminate the stack
+docker-compose down
+
+# Check the stack status
+docker-compose ps
+
+# Pause and unpause the stack
+docker-compose pause
+docker-compose unpause
+
+# Restart the stack
+docker-compose restart
+
+# Run if you have done changes to a running container and you want to save them to an image
+docker commit -t hvbnext/streamsets:mychanges <container id>
+
+# Save image to registry if you have write permission to the repository (here Docker Hub hvbnext account)
+docker push hvbnext/streamsets:mychanges
