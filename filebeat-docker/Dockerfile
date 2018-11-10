@@ -1,3 +1,3 @@
-FROM docker.elastic.co/beats/filebeat:6.3.0
+FROM vc11web/filebeat:base
 COPY ./filebeat.yml /usr/share/filebeat/filebeat.yml
 USER root

@@ -16,13 +16,22 @@ steps:
 - script: docker login -u $(dockerId) -p $(dockerpwd) 
   displayName: 'docker login'
 
+# Build base image - filebeat
+- script: |
+    cd base/filebeat
+    docker build -t $(dockerId)/filebeat:base .
+  displayName: 'docker build base filebeat image'
+
+- script: docker push $(dockerId)/filebeat:base
+  displayName: 'docker push base filebeat image'
+
 # Build base image - kafka
 - script: |
     cd base/kafka
-    docker build -t $(dockerId)/kafka:base-$(confluentversion) .
+    docker build -t $(dockerId)/kafka:base .
   displayName: 'docker build base kafka image'
 
-- script: docker push $(dockerId)/kafka:base-$(confluentversion)
+- script: docker push $(dockerId)/kafka:base
   displayName: 'docker push base kafka image'
 
   # Build base image - kafka-manager
@@ -34,13 +43,22 @@ steps:
 - script: docker push $(dockerId)/kafka-manager:base
   displayName: 'docker push base kafka-manager image'
 
+# Build base image - metricbeat
+- script: |
+    cd base/metricbeat
+    docker build -t $(dockerId)/metricbeat:base .
+  displayName: 'docker build base metricbeat image'
+
+- script: docker push $(dockerId)/metricbeat:base
+  displayName: 'docker push base metricbeat image'
+
 # Build base image - zookeeper
 - script: |
     cd base/zookeeper
-    docker build -t $(dockerId)/zookeeper:base-$(confluentversion) .
+    docker build -t $(dockerId)/zookeeper:base .
   displayName: 'docker build base zookeeper image'
 
-- script: docker push $(dockerId)/zookeeper:base-$(confluentversion)
+- script: docker push $(dockerId)/zookeeper:base
   displayName: 'docker push base zookeeper image'
 
 # Build image - filebeat docker

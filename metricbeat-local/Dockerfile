@@ -1,3 +1,3 @@
-FROM docker.elastic.co/beats/metricbeat:6.3.0
+FROM vc11web/metricbeat:base
 COPY ./metricbeat.yml /usr/share/metricbeat/metricbeat.yml
 USER root
