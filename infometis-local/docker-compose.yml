@@ -12,7 +12,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: hvbnext/kafka:base-4.1.0
+    image: vc11web/kafka:base-4.1.0
     hostname: kafka
     container_name: kafka
     ports:
@@ -37,8 +37,7 @@ services:
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
 
   kafka-manager:
-    image: sheepkiller/kafka-manager
-#    image: hvbnext/kafka-manager:local
+    image: vc11web/kafka-manager:base
     hostname: kafka-manager
     container_name: kafka-manager
     ports:

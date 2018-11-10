@@ -25,6 +25,15 @@ steps:
 - script: docker push $(dockerId)/kafka:base-$(confluentversion)
   displayName: 'docker push base kafka image'
 
+  # Build base image - kafka-manager
+- script: |
+    cd base/kafka-manager
+    docker build -t $(dockerId)/kafka-manager:base .
+  displayName: 'docker build base kafka-manager image'
+
+- script: docker push $(dockerId)/kafka-manager:base
+  displayName: 'docker push base kafka-manager image'
+
 # Build base image - zookeeper
 - script: |
     cd base/zookeeper
