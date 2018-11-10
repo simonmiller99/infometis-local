@@ -52,6 +52,15 @@ steps:
 - script: docker push $(dockerId)/filebeat:docker
   displayName: 'docker push filebeat:docker image'
 
+# Build image - metricbeat local
+- script: |
+    cd metricbeat-local
+    docker build -t $(dockerId)/metricbeat:local .
+  displayName: 'docker build metricbeat:local image'
+
+- script: docker push $(dockerId)/metricbeat:local
+  displayName: 'docker push metricbeat:local image'
+
 # Build main container image - infometis-local
 - script: |
     cd $(imageName)

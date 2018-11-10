@@ -59,7 +59,7 @@ services:
       no_proxy: "elasticsearch, kafka"
 
   metricbeat-local:
-    image: hvbnext/metricbeat:local
+    image: vc11web/metricbeat:local
     hostname: metricbeat-local
     container_name: metricbeat-local
     command: metricbeat -e -strict.perms=false
