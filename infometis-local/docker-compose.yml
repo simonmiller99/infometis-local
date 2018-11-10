@@ -2,7 +2,7 @@
 version: '3'
 services:
   zookeeper:
-    image: vc11web/zookeeper:base
+    image: vc11web/zookeeper:base-4.1.0
     hostname: zookeeper
     container_name: zookeeper
     ports:

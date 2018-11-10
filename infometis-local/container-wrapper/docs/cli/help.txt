@@ -14,6 +14,8 @@ Arguments:
     --help              Print usage
 
     docker              Extract Dockerfile for this container to the current directory.
+
+    docker-compose      Extract docker-compose for the container application.
 	
 	
 	

@@ -10,11 +10,22 @@ variables:
   dockerId: 'vc11web'
   imageName: 'infometis-local'
   imageTag: 'v1'
+  confluentversion: '4.1.0'
 
 steps:
 - script: docker login -u $(dockerId) -p $(dockerpwd) 
   displayName: 'docker login'
 
+# Build base image - zookeeper
+- script: |
+    cd zookeeper
+    docker build -t $(dockerId)/zookeeper:base-$(confluentversion) .
+  displayName: 'docker build'
+
+- script: docker push $(dockerId)/zookeeper:base-$(confluentversion)
+  displayName: 'docker push'
+
+# Build main container image - infometis-local
 - script: |
     cd $(imageName)
     docker build -t $(dockerId)/$(imageName):$(imageTag) .
