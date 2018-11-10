@@ -1,0 +1,74 @@
+###################### Filebeat Configuration Example #########################
+
+# Check filebeat.reference.yml in TaskInstaller/Configuration folder
+# for full set of available settings and configuration info
+
+#=========================== Filebeat prospectors =============================
+
+filebeat.prospectors:
+- input_type: log
+  paths: 
+    - /hostfs/var/lib/docker/containers/*/*.log
+  document_type: docker
+#  fields_under_root: true
+#  json.keys_under_root: true  
+#  json.overwrite_keys: true  
+#  json.message_key: log   
+  
+#============================= Filebeat modules ===============================
+
+#filebeat.config.modules:
+#  path: ${path.config}/modules.d/*.yml
+#  reload.enabled: false
+
+#==================== Elasticsearch template setting ==========================
+
+setup.template.settings:
+  index.number_of_shards: 3
+
+#================================ General =====================================
+
+#d
+
+#============================== Dashboards =====================================
+
+setup.dashboards.enabled: false
+
+#============================== Kibana =====================================
+
+setup.kibana:
+#  host: "localhost:5601"
+
+#================================ Outputs =====================================
+
+#
+output.kafka:
+  enabled: true
+
+  # initial brokers for reading cluster metadata
+  hosts: ["kafka:29092"]
+
+  # message topic selection + partitioning
+  topic: 'es_filebeat_docker'
+  version: "0.11.0.0"
+  partition.round_robin:
+    reachable_only: false
+
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1000000
+
+#-------------------------- Elasticsearch output ------------------------------
+
+output.elasticsearch:
+  enabled: false
+
+  hosts: ["elasticsearch:9200"]
+
+#===== Logging =====
+logging.level: warning
+
+logging.metrics.enabled: false
+logging.metrics.period: 30s
+
+logging.json: true

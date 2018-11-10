@@ -43,6 +43,15 @@ steps:
 - script: docker push $(dockerId)/zookeeper:base-$(confluentversion)
   displayName: 'docker push base zookeeper image'
 
+# Build image - filebeat docker
+- script: |
+    cd base/filebeat-docker
+    docker build -t $(dockerId)/filebeat:docker .
+  displayName: 'docker build filebeat:docker image'
+
+- script: docker push $(dockerId)/filebeat:docker
+  displayName: 'docker push filebeat:docker image'
+
 # Build main container image - infometis-local
 - script: |
     cd $(imageName)
