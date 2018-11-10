@@ -1,0 +1,20 @@
+
+Usage: docker run [OPTIONS] IMAGE [ARGUMENTS]
+Execute run command on this container image.
+
+[OPTIONS]: 
+
+	(Windows)	-it -v %cd%:/container-wrapper/output
+	(Linux)		-it -v $(pwd):/container-wrapper/output
+
+Arguments:
+
+    --docs              Extract documentation folder to docs in the current directory.
+
+    --help              Print usage
+
+    docker              Extract Dockerfile for this container to the current directory.
+
+	
+	
+	
