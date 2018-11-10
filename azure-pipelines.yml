@@ -16,6 +16,15 @@ steps:
 - script: docker login -u $(dockerId) -p $(dockerpwd) 
   displayName: 'docker login'
 
+# Build base image - kafka
+- script: |
+    cd base/kafka
+    docker build -t $(dockerId)/kafka:base-$(confluentversion) .
+  displayName: 'docker build base kafka image'
+
+- script: docker push $(dockerId)/kafka:base-$(confluentversion)
+  displayName: 'docker push base kafka image'
+
 # Build base image - zookeeper
 - script: |
     cd base/zookeeper

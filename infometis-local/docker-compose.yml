@@ -12,7 +12,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: hvbnext/kafka:local
+    image: hvbnext/kafka:base-4.1.0
     hostname: kafka
     container_name: kafka
     ports:
