@@ -45,7 +45,7 @@ steps:
 
 # Build image - filebeat docker
 - script: |
-    cd base/filebeat-docker
+    cd filebeat-docker
     docker build -t $(dockerId)/filebeat:docker .
   displayName: 'docker build filebeat:docker image'
 
