@@ -6,11 +6,19 @@
 pool:
   vmImage: 'Ubuntu 16.04'
 
+variables:
+  dockerId: 'vc11web'
+  imageName: 'infometis-local'
+  imageTag: 'v1'
+
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: docker login -u $(dockerId) -p $(dockerpwd) 
+  displayName: 'docker login'
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    cd $(imageName)
+    docker build -t $(dockerId)/$(imageName):$(imageTag) .
+  displayName: 'docker build'
+
+- script: docker push $(dockerId)/$(imageName):$(imageTag)
+  displayName: 'docker push'
