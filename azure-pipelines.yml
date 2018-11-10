@@ -18,18 +18,18 @@ steps:
 
 # Build base image - zookeeper
 - script: |
-    cd zookeeper
+    cd base/zookeeper
     docker build -t $(dockerId)/zookeeper:base-$(confluentversion) .
-  displayName: 'docker build'
+  displayName: 'docker build base zookeeper image'
 
 - script: docker push $(dockerId)/zookeeper:base-$(confluentversion)
-  displayName: 'docker push'
+  displayName: 'docker push base zookeeper image'
 
 # Build main container image - infometis-local
 - script: |
     cd $(imageName)
     docker build -t $(dockerId)/$(imageName):$(imageTag) .
-  displayName: 'docker build'
+  displayName: "docker build main image"
 
 - script: docker push $(dockerId)/$(imageName):$(imageTag)
-  displayName: 'docker push'
+  displayName: 'docker push main image'
