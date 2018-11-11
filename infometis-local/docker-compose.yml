@@ -2,7 +2,7 @@
 version: '3'
 services:
   zookeeper:
-    image: vc11web/zookeeper:base
+    image: hvbnext/zookeeper:local
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -12,7 +12,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: vc11web/kafka:base
+    image: hvbnext/kafka:local
     hostname: kafka
     container_name: kafka
     ports:
@@ -37,7 +37,7 @@ services:
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
 
   kafka-manager:
-    image: vc11web/kafka-manager:base
+    image: hvbnext/kafka-manager:local
     hostname: kafka-manager
     container_name: kafka-manager
     ports:
@@ -48,7 +48,7 @@ services:
       KM_ARGS: -Djava.net.preferIPv4Stack=true
 
   filebeat-docker:
-    image: vc11web/filebeat:docker
+    image: hvbnext/filebeat:docker
     hostname: filebeat-docker
     container_name: filebeat-docker
     command: filebeat -e -strict.perms=false
@@ -59,7 +59,7 @@ services:
       no_proxy: "elasticsearch, kafka"
 
   metricbeat-local:
-    image: vc11web/metricbeat:local
+    image: hvbnext/metricbeat:local
     hostname: metricbeat-local
     container_name: metricbeat-local
     command: metricbeat -e -strict.perms=false
@@ -110,7 +110,7 @@ services:
       - 9200:9200
       - 9300:9300
   kibana:
-    image: vcweb/kibana:base
+    image: hvbnext/kibana:local
     hostname: kibana
     container_name: kibana
     environment:
@@ -119,7 +119,7 @@ services:
       - 5601:5601
 
   grafana:
-    image: hvbnext/grafana:local
+    image: vc11web/grafana:local
     hostname: grafana
     container_name: grafana
     environment:

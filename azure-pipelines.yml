@@ -10,29 +10,37 @@ variables:
   registry: 'vc11web'
   imageName: 'infometis-local'
   imageTag: 'v1'
-  confluentversion: '4.1.0'
 
 steps:
 - script: docker login -u $(registry) -p $(dockerpwd) 
   displayName: 'docker login'
 
 # Build image - filebeat docker
-- script: |
-    cd filebeat-docker
-    docker build -t $(registry)/filebeat:docker . --build-arg REGISTRY=$(registry)
-  displayName: 'docker build filebeat:docker image'
+#- script: |
+#    cd filebeat-docker
+#    docker build -t $(registry)/filebeat:docker . --build-arg REGISTRY=$(registry)
+#  displayName: 'docker build filebeat:docker image'
 
-- script: docker push $(registry)/filebeat:docker
-  displayName: 'docker push filebeat:docker image'
+#- script: docker push $(registry)/filebeat:docker
+#  displayName: 'docker push filebeat:docker image'
+
+# Build image - grafana local
+- script: |
+    cd grafana
+    docker build -t $(registry)/grafana:local . --build-arg REGISTRY=$(registry)
+  displayName: 'docker build grafana:local image'
+
+- script: docker push $(registry)/grafana:local
+  displayName: 'docker push grafana:local image'
 
 # Build image - metricbeat local 
-- script: |
-    cd metricbeat-local
-    docker build -t $(registry)/metricbeat:local . --build-arg REGISTRY=$(registry)
-  displayName: 'docker build metricbeat:local image'
+#- script: |
+#    cd metricbeat-local
+#    docker build -t $(registry)/metricbeat:local . --build-arg REGISTRY=$(registry)
+#  displayName: 'docker build metricbeat:local image'
 
-- script: docker push $(registry)/metricbeat:local
-  displayName: 'docker push metricbeat:local image'
+#- script: docker push $(registry)/metricbeat:local
+#  displayName: 'docker push metricbeat:local image'
 
 # Build main container image - infometis-local
 - script: |

@@ -25,3 +25,16 @@ docker commit -t hvbnext/streamsets:mychanges <container id>
 
 # Save image to registry if you have write permission to the repository (here Docker Hub hvbnext account)
 docker push hvbnext/streamsets:mychanges
+
+# Remove existing container and images
+docker image rm --force vc11web/infometis-local:v1
+docker image rm --force hvbnext/zookeeper:local
+docker image rm --force hvbnext/kafka:local
+docker image rm --force hvbnext/kafka-manager:local
+docker image rm --force hvbnext/filebeat:docker
+docker image rm --force hvbnext/metricbeat:local
+docker image rm --force hvbnext/streamsets:local
+docker image rm --force hvbnext/streamsets:logs_mq
+docker image rm --force hvbnext/elasticsearch:local
+docker image rm --force hvbnext/kibana:local
+docker image rm --force hvbnext/grafana:local
