@@ -2,7 +2,7 @@
 version: '3'
 services:
   zookeeper:
-    image: vc11web/zookeeper::base
+    image: vc11web/zookeeper:base
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -12,7 +12,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: vc11web/kafka::base
+    image: vc11web/kafka:base
     hostname: kafka
     container_name: kafka
     ports:

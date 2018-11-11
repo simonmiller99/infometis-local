@@ -28,13 +28,13 @@ docker push hvbnext/streamsets:mychanges
 
 # Remove existing container and images
 docker image rm --force vc11web/infometis-local:v1
-docker image rm --force hvbnext/zookeeper:local
-docker image rm --force hvbnext/kafka:local
-docker image rm --force hvbnext/kafka-manager:local
-docker image rm --force hvbnext/filebeat:docker
-docker image rm --force hvbnext/metricbeat:local
-docker image rm --force hvbnext/streamsets:local
-docker image rm --force hvbnext/streamsets:logs_mq
-docker image rm --force hvbnext/elasticsearch:local
-docker image rm --force hvbnext/kibana:local
-docker image rm --force hvbnext/grafana:local
+docker image rm --force vc11web/zookeeper:base
+docker image rm --force vc11web/kafka:base
+docker image rm --force vc11web/kafka-manager:base
+docker image rm --force vc11web/filebeat:docker
+docker image rm --force vc11web/metricbeat:local
+docker image rm --force vc11web/streamsets:local
+docker image rm --force vc11web/streamsets:dev
+docker image rm --force vc11web/elasticsearch:base
+docker image rm --force vc11web/kibana:local
+docker image rm --force vc11web/grafana:local
