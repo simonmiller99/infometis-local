@@ -1,0 +1,395 @@
+# # config file version
+apiVersion: 1
+  
+datasources:
+- name: es_metricbeat_docker_container
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_docker_container"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true   
+  
+- name: es_metricbeat_docker_cpu
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_docker_cpu"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true   
+  
+- name: es_metricbeat_docker_diskio
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_docker_diskio"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true   
+  
+- name: es_metricbeat_docker_healthcheck
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_docker_healthcheck"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true   
+  
+- name: es_metricbeat_docker_image
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_docker_image"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true   
+  
+- name: es_metricbeat_docker_info
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_docker_info"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true 
+  
+- name: es_metricbeat_docker_memory
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_docker_memory"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true 
+    
+- name: es_metricbeat_docker_network
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_docker_network"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+  
+- name: es_metricbeat_elasticsearch_node
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_elasticsearch_node"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true 
+  
+- name: es_metricbeat_elasticsearch_node_stats
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_elasticsearch_node_stats"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true 
+  
+- name: es_metricbeat_kafka_consumergroup
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_kafka_consumergroup"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true 
+
+- name: es_metricbeat_kafka_partition
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_kafka_partition"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true 
+  
+- name: es_metricbeat_kibana
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_kibana"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true 
+    
+- name: es_metricbeat_system_core
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_core"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true 
+      
+- name: es_metricbeat_system_cpu
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_cpu"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+
+- name: es_metricbeat_system_diskio
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_diskio"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+
+- name: es_metricbeat_system_filesystem
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_filesystem"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+
+- name: es_metricbeat_system_fsstat
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_fsstat"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+
+- name: es_metricbeat_system_load
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_load"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+
+- name: es_metricbeat_system_memory
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_memory"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+
+- name: es_metricbeat_system_network
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_network"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+
+- name: es_metricbeat_system_process
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_process"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+
+- name: es_metricbeat_system_process_summary
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_process_summary"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+
+- name: es_metricbeat_system_socket
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_socket"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+
+- name: es_metricbeat_system_uptime
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_system_uptime"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true
+  
+- name: es_metricbeat_zookeeper
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_metricbeat_zookeeper"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: TIMESTAMP
+    timeInterval: 60s
+  version: 1
+  editable: true 
+  
+  

@@ -70,7 +70,7 @@ steps:
 - script: docker push $(dockerId)/filebeat:docker
   displayName: 'docker push filebeat:docker image'
 
-# Build image - metricbeat local
+# Build image - metricbeat local 
 - script: |
     cd metricbeat-local
     docker build -t $(dockerId)/metricbeat:local .
