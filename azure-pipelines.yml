@@ -33,14 +33,41 @@ steps:
 - script: docker push $(registry)/grafana:local
   displayName: 'docker push grafana:local image'
 
-# Build image - metricbeat local 
-#- script: |
-#    cd metricbeat-local
-#    docker build -t $(registry)/metricbeat:local . --build-arg REGISTRY=$(registry)
-#  displayName: 'docker build metricbeat:local image'
+# Build image - kibana local 
+- script: |
+    cd kibana-local
+    docker build -t $(registry)/kibana:local . --build-arg REGISTRY=$(registry)
+  displayName: 'docker build kibana:local image'
 
-#- script: docker push $(registry)/metricbeat:local
-#  displayName: 'docker push metricbeat:local image'
+- script: docker push $(registry)/kibana:local
+  displayName: 'docker push kibana:local image'
+
+# Build image - metricbeat local 
+- script: |
+    cd metricbeat-local
+    docker build -t $(registry)/metricbeat:local . --build-arg REGISTRY=$(registry)
+  displayName: 'docker build metricbeat:local image'
+
+- script: docker push $(registry)/metricbeat:local
+  displayName: 'docker push metricbeat:local image'
+
+# Build image - streamsets dev
+- script: |
+    cd streamsets-dev
+    docker build -t $(registry)/streamsets:dev . --build-arg REGISTRY=$(registry)
+  displayName: 'docker build streamsets:dev image'
+
+- script: docker push $(registry)/streamsets:dev
+  displayName: 'docker push streamsets:dev image'
+
+# Build image - streamsets local 
+- script: |
+    cd streamsets-local
+    docker build -t $(registry)/streamsets:local . --build-arg REGISTRY=$(registry)
+  displayName: 'docker build streamsets:local image'
+
+- script: docker push $(registry)/streamsets:local
+  displayName: 'docker push streamsets:local image'
 
 # Build main container image - infometis-local
 - script: |

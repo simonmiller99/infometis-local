@@ -2,7 +2,7 @@
 version: '3'
 services:
   zookeeper:
-    image: hvbnext/zookeeper:local
+    image: vc11web/zookeeper::base
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -12,7 +12,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: hvbnext/kafka:local
+    image: vc11web/kafka::base
     hostname: kafka
     container_name: kafka
     ports:
@@ -37,7 +37,7 @@ services:
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
 
   kafka-manager:
-    image: hvbnext/kafka-manager:local
+    image: vc11web/kafka-manager:base
     hostname: kafka-manager
     container_name: kafka-manager
     ports:
@@ -59,7 +59,7 @@ services:
       no_proxy: "elasticsearch, kafka"
 
   metricbeat-local:
-    image: hvbnext/metricbeat:local
+    image: vc11web/metricbeat:local
     hostname: metricbeat-local
     container_name: metricbeat-local
     command: metricbeat -e -strict.perms=false
@@ -70,7 +70,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   streamsets-local:
-    image: hvbnext/streamsets:local
+    image: vc11web/streamsets:local
     hostname: streamsets-local
     container_name: streamsets-local
     ports:
@@ -82,7 +82,7 @@ services:
       no_proxy: "elasticsearch, kafka, kafka-connect-ui"
 
   streamsets:
-    image: hvbnext/streamsets:logs_mq
+    image: vc11web/streamsets:dev
     hostname: streamsets
     container_name: streamsets
     ports:
@@ -95,13 +95,13 @@ services:
       no_proxy: "elasticsearch, kafka, kafka-connect-ui"
 
   elasticsearch:
-    image: hvbnext/elasticsearch:local
+    image: vc11web/elasticsearch:base
     hostname: elasticsearch
     container_name: elasticsearch
     environment:
       - clustername=elastic-kafka
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms1G -Xmx1G"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
         soft: -1
@@ -109,8 +109,9 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
+
   kibana:
-    image: hvbnext/kibana:local
+    image: vc11web/kibana:local
     hostname: kibana
     container_name: kibana
     environment:

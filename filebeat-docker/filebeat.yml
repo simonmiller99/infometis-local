@@ -49,7 +49,7 @@ output.kafka:
   hosts: ["kafka:29092"]
 
   # message topic selection + partitioning
-  topic: 'es_filebeat_docker'
+  topic: 'in_es_filebeat_docker'
   version: "0.11.0.0"
   partition.round_robin:
     reachable_only: false
