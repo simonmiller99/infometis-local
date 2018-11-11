@@ -1,5 +1,5 @@
 ARG REGISTRY=invalid
-FROM $REGISTRY/streamsets:dev
+FROM $REGISTRY/streamsets:base
 
 USER root
 
