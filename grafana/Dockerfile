@@ -1,4 +1,5 @@
-FROM grafana/grafana
+ARG REGISTRY=invalid
+FROM $REGISTRY/grafana:base
 #COPY ./custom.ini /usr/share/grafana/conf/custom.ini
 #COPY ./defaults.ini /usr/share/grafana/conf/defaults.ini
 #COPY ./grafana.ini /etc/grafana/defaults.ini

@@ -19,7 +19,7 @@ services:
       - '9092:9092'
       - '29092:29092'
     environment:
-      KAFKA_HEAP_OPTS: "-Xmx1G -Xms1G"
+      KAFKA_HEAP_OPTS: "-Xmx512m -Xms512m"
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:32181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
@@ -110,7 +110,7 @@ services:
       - 9200:9200
       - 9300:9300
   kibana:
-    image: hvbnext/kibana:local
+    image: vcweb/kibana:base
     hostname: kibana
     container_name: kibana
     environment:

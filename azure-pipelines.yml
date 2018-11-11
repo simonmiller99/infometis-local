@@ -7,83 +7,38 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 variables:
-  dockerId: 'vc11web'
+  registry: 'vc11web'
   imageName: 'infometis-local'
   imageTag: 'v1'
   confluentversion: '4.1.0'
 
 steps:
-- script: docker login -u $(dockerId) -p $(dockerpwd) 
+- script: docker login -u $(registry) -p $(dockerpwd) 
   displayName: 'docker login'
-
-# Build base image - filebeat
-- script: |
-    cd base/filebeat
-    docker build -t $(dockerId)/filebeat:base .
-  displayName: 'docker build base filebeat image'
-
-- script: docker push $(dockerId)/filebeat:base
-  displayName: 'docker push base filebeat image'
-
-# Build base image - kafka
-- script: |
-    cd base/kafka
-    docker build -t $(dockerId)/kafka:base .
-  displayName: 'docker build base kafka image'
-
-- script: docker push $(dockerId)/kafka:base
-  displayName: 'docker push base kafka image'
-
-  # Build base image - kafka-manager
-- script: |
-    cd base/kafka-manager
-    docker build -t $(dockerId)/kafka-manager:base .
-  displayName: 'docker build base kafka-manager image'
-
-- script: docker push $(dockerId)/kafka-manager:base
-  displayName: 'docker push base kafka-manager image'
-
-# Build base image - metricbeat
-- script: |
-    cd base/metricbeat
-    docker build -t $(dockerId)/metricbeat:base .
-  displayName: 'docker build base metricbeat image'
-
-- script: docker push $(dockerId)/metricbeat:base
-  displayName: 'docker push base metricbeat image'
-
-# Build base image - zookeeper
-- script: |
-    cd base/zookeeper
-    docker build -t $(dockerId)/zookeeper:base .
-  displayName: 'docker build base zookeeper image'
-
-- script: docker push $(dockerId)/zookeeper:base
-  displayName: 'docker push base zookeeper image'
 
 # Build image - filebeat docker
 - script: |
     cd filebeat-docker
-    docker build -t $(dockerId)/filebeat:docker .
+    docker build -t $(registry)/filebeat:docker . --build-arg REGISTRY=$(registry)
   displayName: 'docker build filebeat:docker image'
 
-- script: docker push $(dockerId)/filebeat:docker
+- script: docker push $(registry)/filebeat:docker
   displayName: 'docker push filebeat:docker image'
 
 # Build image - metricbeat local 
 - script: |
     cd metricbeat-local
-    docker build -t $(dockerId)/metricbeat:local .
+    docker build -t $(registry)/metricbeat:local . --build-arg REGISTRY=$(registry)
   displayName: 'docker build metricbeat:local image'
 
-- script: docker push $(dockerId)/metricbeat:local
+- script: docker push $(registry)/metricbeat:local
   displayName: 'docker push metricbeat:local image'
 
 # Build main container image - infometis-local
 - script: |
     cd $(imageName)
-    docker build -t $(dockerId)/$(imageName):$(imageTag) .
+    docker build -t $(registry)/$(imageName):$(imageTag) .
   displayName: "docker build main image"
 
-- script: docker push $(dockerId)/$(imageName):$(imageTag)
+- script: docker push $(registry)/$(imageName):$(imageTag)
   displayName: 'docker push main image'
