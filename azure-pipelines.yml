@@ -16,13 +16,13 @@ steps:
   displayName: 'docker login'
 
 # Build image - filebeat docker
-#- script: |
-#    cd filebeat-docker
-#    docker build -t $(registry)/filebeat:docker . --build-arg REGISTRY=$(registry)
-#  displayName: 'docker build filebeat:docker image'
+- script: |
+    cd filebeat-docker
+    docker build -t $(registry)/filebeat:docker . --build-arg REGISTRY=$(registry)
+  displayName: 'docker build filebeat:docker image'
 
-#- script: docker push $(registry)/filebeat:docker
-#  displayName: 'docker push filebeat:docker image'
+- script: docker push $(registry)/filebeat:docker
+  displayName: 'docker push filebeat:docker image'
 
 # Build image - grafana local
 - script: |

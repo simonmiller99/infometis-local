@@ -1,8 +1,51 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_ES_METRICBEAT_SYSTEM_MEMORY",
+      "label": "es_metricbeat_system_memory",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "elasticsearch",
+      "pluginName": "Elasticsearch"
+    },
+    {
+      "name": "DS_ES_METRICBEAT_SYSTEM_CPU",
+      "label": "es_metricbeat_system_cpu",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "elasticsearch",
+      "pluginName": "Elasticsearch"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "datasource",
+      "id": "elasticsearch",
+      "name": "Elasticsearch",
+      "version": "5.0.0"
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "5.2.3"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": "5.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": "5.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:85",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -17,7 +60,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1530467802920,
+  "iteration": 1541942525787,
   "links": [],
   "panels": [
     {
@@ -25,7 +68,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_system_memory",
+      "datasource": "${DS_ES_METRICBEAT_SYSTEM_MEMORY}",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -60,7 +103,7 @@
           "alias": "Total",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -72,22 +115,22 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_TOTAL",
+              "field": "total",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Free",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -99,22 +142,22 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_FREE",
+              "field": "free",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Actual Free",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -126,22 +169,22 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_ACTUAL_FREE",
+              "field": "actual_free",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "D",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Used",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -153,16 +196,16 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_USED_BYTES",
+              "field": "actual_used_bytes",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "E",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -210,7 +253,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_system_memory",
+      "datasource": "${DS_ES_METRICBEAT_SYSTEM_MEMORY}",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -245,7 +288,7 @@
           "alias": "Used",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -257,22 +300,22 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_USED_PCT",
+              "field": "actual_used_pct",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Actual Used",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -284,22 +327,22 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_ACTUAL_USED_PCT",
+              "field": "actual_used_pct",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Swap Used",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -311,15 +354,16 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_SWAP_USED_PCT",
+              "field": "swap_used_pct",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
+          "query": "beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -367,7 +411,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_system_memory",
+      "datasource": "${DS_ES_METRICBEAT_SYSTEM_MEMORY}",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -401,7 +445,7 @@
         {
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -413,21 +457,21 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_SWAP_TOTAL",
+              "field": "swap_total",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -439,21 +483,21 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_SWAP_USED_BYTES",
+              "field": "swap_used_bytes",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -465,16 +509,16 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_SWAP_FREE",
+              "field": "swap_free",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -519,7 +563,7 @@
     },
     {
       "columns": [],
-      "datasource": "es_metricbeat_system_memory",
+      "datasource": "${DS_ES_METRICBEAT_SYSTEM_MEMORY}",
       "fontSize": "100%",
       "gridPos": {
         "h": 6,
@@ -563,7 +607,7 @@
           "alias": "Total",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -575,22 +619,22 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_TOTAL",
+              "field": "total",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Used",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -602,22 +646,22 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_USED_BYTES",
+              "field": "used_bytes",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "E",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Actual Used",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -629,22 +673,22 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_ACTUAL_USED_BYTES",
+              "field": "actual_used_bytes",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "D",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Free",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -656,22 +700,22 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_FREE",
+              "field": "free",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Actual Free",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -683,16 +727,16 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_ACTUAL_FREE",
+              "field": "actual_free",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Current RAM Stats",
@@ -701,7 +745,7 @@
     },
     {
       "columns": [],
-      "datasource": "es_metricbeat_system_memory",
+      "datasource": "${DS_ES_METRICBEAT_SYSTEM_MEMORY}",
       "fontSize": "100%",
       "gridPos": {
         "h": 6,
@@ -742,12 +786,10 @@
       ],
       "targets": [
         {
-          "$$hashKey": "object:225",
           "alias": "Total",
           "bucketAggs": [
             {
-              "$$hashKey": "object:382",
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -759,25 +801,22 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:380",
-              "field": "MEMORY_SWAP_TOTAL",
+              "field": "swap_total",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
-          "$$hashKey": "object:226",
           "alias": "Used",
           "bucketAggs": [
             {
-              "$$hashKey": "object:415",
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -789,25 +828,22 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:413",
-              "field": "MEMORY_SWAP_USED_BYTES",
+              "field": "swap_used_bytes",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "E",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
-          "$$hashKey": "object:227",
           "alias": "Free",
           "bucketAggs": [
             {
-              "$$hashKey": "object:448",
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -819,17 +855,16 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:446",
-              "field": "MEMORY_SWAP_FREE",
+              "field": "swap_free",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "D",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Current Swap Stats",
@@ -845,18 +880,15 @@
     "list": [
       {
         "allValue": null,
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "es_metricbeat_system_cpu",
+        "current": {},
+        "datasource": "${DS_ES_METRICBEAT_SYSTEM_CPU}",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "Node",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"BEAT_NAME.keyword\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"beat_name.keyword\"}",
         "refresh": 1,
         "regex": "",
         "sort": 1,
@@ -900,5 +932,5 @@
   "timezone": "",
   "title": "ES Metricbeat - System Memory",
   "uid": "pNXnShDmk",
-  "version": 3
+  "version": 1
 }

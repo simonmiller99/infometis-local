@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1531050636072,
+  "iteration": 1541943939784,
   "links": [],
   "panels": [
     {
@@ -85,7 +85,7 @@
           "alias": "Total Memory",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -97,16 +97,16 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_LIMIT",
+              "field": "limit",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Total Memory Limit",
@@ -180,7 +180,7 @@
           "alias": "Fail Count",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -192,16 +192,16 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_FAIL_COUNT",
+              "field": "fail_count",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Memory Fail Count",
@@ -279,7 +279,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -290,7 +290,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -302,16 +302,16 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_USAGE_TOTAL",
+              "field": "usage_total",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Max Memory Usage",
@@ -389,7 +389,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -400,7 +400,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -412,16 +412,16 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_RSS_TOTAL",
+              "field": "rss_total",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Resident Set Size",
@@ -468,7 +468,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -479,7 +479,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -491,7 +491,7 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_USAGE_MAX",
+              "field": "usage_max",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -507,9 +507,9 @@
               "type": "derivative"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -593,7 +593,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -604,7 +604,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -616,7 +616,7 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_RSS_TOTAL",
+              "field": "rss_total",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -632,9 +632,9 @@
               "type": "derivative"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -718,7 +718,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -729,7 +729,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -741,16 +741,16 @@
           ],
           "metrics": [
             {
-              "field": "MEMORY_FAIL_COUNT",
+              "field": "fail_count",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "BEAT_NAME=$Node",
+          "query": "beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -804,21 +804,20 @@
       {
         "allValue": null,
         "current": {
-          "text": "POTF_KPN_metricbeat",
-          "value": [
-            "POTF_KPN_metricbeat"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
-        "datasource": "es_metricbeat_docker_diskio",
+        "datasource": "es_metricbeat_docker_container",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "Node",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"BEAT_NAME.keyword\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"beat_name.keyword\"}",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],

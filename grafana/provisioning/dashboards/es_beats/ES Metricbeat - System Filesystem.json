@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1530212372229,
+  "iteration": 1541945859112,
   "links": [],
   "panels": [
     {
@@ -85,7 +85,7 @@
           "alias": "Disk Space",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -97,22 +97,22 @@
           ],
           "metrics": [
             {
-              "field": "FSSTAT_TOTAL_SIZE_TOTAL",
+              "field": "total_size_total",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Free Space",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -124,22 +124,22 @@
           ],
           "metrics": [
             {
-              "field": "FSSTAT_TOTAL_SIZE_FREE",
+              "field": "total_size_free",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "min"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Used Space",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -151,16 +151,16 @@
           ],
           "metrics": [
             {
-              "field": "FSSTAT_TOTAL_SIZE_USED",
+              "field": "total_size_used",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "FS Stats",
@@ -174,7 +174,7 @@
           "value": "avg"
         }
       ],
-      "datasource": "es_metricbeat_system_fsstat",
+      "datasource": "es_metricbeat_system_filesystem",
       "fontSize": "100%",
       "gridPos": {
         "h": 5,
@@ -234,7 +234,7 @@
           "alias": "Mounted Filesystems",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -255,13 +255,13 @@
           ],
           "query": "WHERE BEAT_NAME=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Number of Files",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -282,7 +282,7 @@
           ],
           "query": "WHERE BEAT_NAME=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Filesystems & Files",
@@ -367,7 +367,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -388,7 +388,7 @@
           ],
           "query": "WHERE BEAT_NAME=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Filesystem - Available Space",
@@ -473,7 +473,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -494,7 +494,7 @@
           ],
           "query": "WHERE BEAT_NAME=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Filesystem - Free Space",
@@ -579,7 +579,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -600,7 +600,7 @@
           ],
           "query": "WHERE BEAT_NAME=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Filesystem - Total Space",
@@ -686,7 +686,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -707,7 +707,7 @@
           ],
           "query": "WHERE BEAT_NAME=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Filesystem - Free Files",
@@ -792,7 +792,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -813,7 +813,7 @@
           ],
           "query": "WHERE BEAT_NAME=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Filesystem - Files",
@@ -827,7 +827,7 @@
           "value": "avg"
         }
       ],
-      "datasource": "es_metricbeat_system_filesystem",
+      "datasource": "es_metricbeat_system_fsstat",
       "fontSize": "100%",
       "gridPos": {
         "h": 4,
@@ -898,7 +898,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -919,7 +919,7 @@
           ],
           "query": "WHERE BEAT_NAME=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Filesystem - Percentage Used",
@@ -936,7 +936,6 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -947,9 +946,10 @@
         "multi": true,
         "name": "Node",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"BEAT_NAME.keyword\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"beat_name.keyword\"}",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],

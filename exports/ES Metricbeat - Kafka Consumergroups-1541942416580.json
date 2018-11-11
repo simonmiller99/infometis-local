@@ -1,4 +1,40 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_ES_METRICBEAT_KAFKA_CONSUMERGROUP",
+      "label": "es_metricbeat_kafka_consumergroup",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "elasticsearch",
+      "pluginName": "Elasticsearch"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "datasource",
+      "id": "elasticsearch",
+      "name": "Elasticsearch",
+      "version": "5.0.0"
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "5.2.3"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": "5.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": "5.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -15,7 +51,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1530996726944,
+  "id": null,
+  "iteration": 1541942410038,
   "links": [],
   "panels": [
     {
@@ -23,7 +60,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_kafka_consumergroup",
+      "datasource": "${DS_ES_METRICBEAT_KAFKA_CONSUMERGROUP}",
       "fill": 1,
       "gridPos": {
         "h": 11,
@@ -58,7 +95,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONSUMERGROUP_ID.keyword",
+              "field": "client_id.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -69,7 +106,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -81,7 +118,7 @@
           ],
           "metrics": [
             {
-              "field": "CONSUMERGROUP_OFFSET",
+              "field": "offset",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -97,9 +134,9 @@
               "type": "derivative"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node AND NOT(TOPIC_NAME LIKE _*)",
+          "query": "WHERE beat_name=$Node AND NOT(topic_name LIKE _*)",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -149,7 +186,7 @@
           "value": "avg"
         }
       ],
-      "datasource": "es_metricbeat_kafka_consumergroup",
+      "datasource": "${DS_ES_METRICBEAT_KAFKA_CONSUMERGROUP}",
       "fontSize": "100%",
       "gridPos": {
         "h": 21,
@@ -225,7 +262,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONSUMERGROUP_ID.keyword",
+              "field": "id.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -236,7 +273,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -248,16 +285,16 @@
           ],
           "metrics": [
             {
-              "field": "CONSUMERGROUP_OFFSET",
+              "field": "offset",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Consumergroups",
@@ -269,7 +306,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_kafka_consumergroup",
+      "datasource": "${DS_ES_METRICBEAT_KAFKA_CONSUMERGROUP}",
       "fill": 1,
       "gridPos": {
         "h": 10,
@@ -304,7 +341,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONSUMERGROUP_ID.keyword",
+              "field": "client_id.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -315,7 +352,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -327,7 +364,7 @@
           ],
           "metrics": [
             {
-              "field": "CONSUMERGROUP_OFFSET",
+              "field": "offset",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -343,9 +380,9 @@
               "type": "derivative"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node AND (TOPIC_NAME LIKE _*)",
+          "query": "WHERE beat_name=$Node AND (topic_name LIKE _*)",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -397,18 +434,15 @@
     "list": [
       {
         "allValue": null,
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "es_metricbeat_kafka_consumergroup",
+        "current": {},
+        "datasource": "${DS_ES_METRICBEAT_KAFKA_CONSUMERGROUP}",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "Node",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"BEAT_NAME.keyword\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"beat_name.keyword\"}",
         "refresh": 1,
         "regex": "",
         "sort": 1,

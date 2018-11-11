@@ -2,7 +2,6 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:7049",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -16,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1530986893431,
+  "iteration": 1541943796426,
   "links": [],
   "panels": [
     {
@@ -25,10 +23,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_docker_network",
+      "datasource": "es_metricbeat_docker_diskio",
       "fill": 1,
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 7,
         "x": 0,
         "y": 0
@@ -39,7 +37,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
@@ -57,25 +55,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:7265",
+          "alias": "beat_name",
           "bucketAggs": [
             {
-              "$$hashKey": "object:8318",
               "fake": true,
-              "field": "NETWORK_INTERFACE.keyword",
-              "id": "4",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "10"
-              },
-              "type": "terms"
-            },
-            {
-              "$$hashKey": "object:7276",
-              "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -86,8 +70,7 @@
               "type": "terms"
             },
             {
-              "$$hashKey": "object:7277",
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -99,22 +82,31 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:7272",
-              "field": "NETWORK_IN_BYTES",
+              "field": "total",
+              "hide": true,
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
+            },
+            {
+              "field": "1",
+              "id": "4",
+              "meta": {},
+              "pipelineAgg": "1",
+              "settings": {},
+              "type": "derivative"
             }
           ],
+          "query": "WHERE  beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Inward Network Traffic - Bytes",
+      "title": "Disk IO Total Rate",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -130,9 +122,8 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:7362",
           "decimals": null,
-          "format": "decbytes",
+          "format": "Bps",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -140,7 +131,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:7363",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -159,10 +149,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_docker_network",
+      "datasource": "es_metricbeat_docker_diskio",
       "fill": 1,
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 7,
         "x": 7,
         "y": 0
@@ -173,141 +163,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "$$hashKey": "object:7468",
-          "bucketAggs": [
-            {
-              "$$hashKey": "object:8455",
-              "fake": true,
-              "field": "NETWORK_INTERFACE.keyword",
-              "id": "4",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "10"
-              },
-              "type": "terms"
-            },
-            {
-              "$$hashKey": "object:7479",
-              "fake": true,
-              "field": "CONTAINER_NAME.keyword",
-              "id": "3",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "$$hashKey": "object:7480",
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "$$hashKey": "object:7475",
-              "field": "NETWORK_OUT_BYTES",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "refId": "A",
-          "timeField": "TIMESTAMP"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Outward Network Traffic - Bytes",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
         "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:7437",
-          "decimals": null,
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:7438",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "es_metricbeat_docker_network",
-      "fill": 1,
-      "gridPos": {
-        "h": 6,
-        "w": 7,
-        "x": 0,
-        "y": 6
-      },
-      "id": 2,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
         "total": false,
         "values": false
       },
@@ -325,25 +181,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:7615",
           "bucketAggs": [
             {
-              "$$hashKey": "object:8392",
               "fake": true,
-              "field": "NETWORK_INTERFACE.keyword",
-              "id": "5",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "10"
-              },
-              "type": "terms"
-            },
-            {
-              "$$hashKey": "object:7626",
-              "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -354,8 +195,7 @@
               "type": "terms"
             },
             {
-              "$$hashKey": "object:7627",
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -367,17 +207,15 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:7622",
-              "field": "NETWORK_IN_PACKETS",
+              "field": "summary_ops",
+              "hide": true,
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             },
             {
-              "$$hashKey": "object:7623",
               "field": "1",
-              "hide": true,
               "id": "4",
               "meta": {},
               "pipelineAgg": "1",
@@ -385,14 +223,15 @@
               "type": "derivative"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Inward Network Traffic - Packets",
+      "title": "Disk IO Total Ops Rate",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -409,7 +248,239 @@
       "yaxes": [
         {
           "decimals": null,
+          "format": "opm",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
           "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "columns": [
+        {
+          "text": "Avg",
+          "value": "avg"
+        }
+      ],
+      "datasource": "es_metricbeat_docker_diskio",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 7,
+        "w": 7,
+        "x": 14,
+        "y": 0
+      },
+      "id": 14,
+      "links": [],
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 1,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "Total Data",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Avg",
+          "thresholds": [],
+          "type": "number",
+          "unit": "decbytes"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "docker_container_name.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "1",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "summary_bytes",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "WHERE beat_name=$Node",
+          "refId": "C",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "Total Data",
+      "transform": "timeseries_aggregations",
+      "type": "table"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "es_metricbeat_docker_diskio",
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 7,
+        "x": 0,
+        "y": 7
+      },
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "docker_container_name.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "write_bytes",
+              "hide": true,
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            },
+            {
+              "field": "1",
+              "id": "4",
+              "meta": {},
+              "pipelineAgg": "1",
+              "settings": {},
+              "type": "derivative"
+            }
+          ],
+          "query": "WHERE beat_name=$Node",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Disk IO Write Rate",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "Bps",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -435,13 +506,13 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_docker_network",
+      "datasource": "es_metricbeat_docker_diskio",
       "fill": 1,
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 7,
         "x": 7,
-        "y": 6
+        "y": 7
       },
       "id": 12,
       "legend": {
@@ -449,7 +520,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
@@ -467,25 +538,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:7762",
           "bucketAggs": [
             {
-              "$$hashKey": "object:8518",
               "fake": true,
-              "field": "NETWORK_INTERFACE.keyword",
-              "id": "4",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "10"
-              },
-              "type": "terms"
-            },
-            {
-              "$$hashKey": "object:7773",
-              "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -496,8 +552,7 @@
               "type": "terms"
             },
             {
-              "$$hashKey": "object:7774",
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -509,22 +564,31 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:7769",
-              "field": "NETWORK_OUT_PACKETS",
+              "field": "write_ops",
+              "hide": true,
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
+            },
+            {
+              "field": "1",
+              "id": "4",
+              "meta": {},
+              "pipelineAgg": "1",
+              "settings": {},
+              "type": "derivative"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Outward Network Traffic - Packets",
+      "title": "Disk IO Write Ops Rate",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -541,7 +605,7 @@
       "yaxes": [
         {
           "decimals": null,
-          "format": "short",
+          "format": "opm",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -563,17 +627,124 @@
       }
     },
     {
+      "columns": [
+        {
+          "text": "Avg",
+          "value": "avg"
+        }
+      ],
+      "datasource": "es_metricbeat_docker_diskio",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 7,
+        "w": 7,
+        "x": 14,
+        "y": 7
+      },
+      "id": 16,
+      "links": [],
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 1,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "Total Write",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Avg",
+          "thresholds": [],
+          "type": "number",
+          "unit": "decbytes"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "docker_container_name.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "1",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "write_bytes",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "WHERE beat_name=$Node",
+          "refId": "C",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "Total Write",
+      "transform": "timeseries_aggregations",
+      "type": "table"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_docker_network",
+      "datasource": "es_metricbeat_docker_diskio",
       "fill": 1,
       "gridPos": {
-        "h": 3,
+        "h": 7,
         "w": 7,
         "x": 0,
-        "y": 12
+        "y": 14
       },
       "id": 6,
       "legend": {
@@ -581,7 +752,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
@@ -599,25 +770,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:8559",
+          "alias": "",
           "bucketAggs": [
             {
-              "$$hashKey": "object:8592",
               "fake": true,
-              "field": "NETWORK_INTERFACE.keyword",
-              "id": "4",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "10"
-              },
-              "type": "terms"
-            },
-            {
-              "$$hashKey": "object:8568",
-              "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -628,8 +785,7 @@
               "type": "terms"
             },
             {
-              "$$hashKey": "object:8569",
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -641,22 +797,31 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:8566",
-              "field": "NETWORK_IN_ERRORS",
+              "field": "read_bytes",
+              "hide": true,
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
+            },
+            {
+              "field": "1",
+              "id": "4",
+              "meta": {},
+              "pipelineAgg": "1",
+              "settings": {},
+              "type": "derivative"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Inward Network Traffic - Errors",
+      "title": "Disk IO Read Rate",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -673,7 +838,7 @@
       "yaxes": [
         {
           "decimals": null,
-          "format": "short",
+          "format": "Bps",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -699,145 +864,13 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_docker_network",
+      "datasource": "es_metricbeat_docker_diskio",
       "fill": 1,
       "gridPos": {
-        "h": 3,
+        "h": 7,
         "w": 7,
         "x": 7,
-        "y": 12
-      },
-      "id": 22,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "$$hashKey": "object:8708",
-          "bucketAggs": [
-            {
-              "$$hashKey": "object:8741",
-              "fake": true,
-              "field": "NETWORK_INTERFACE.keyword",
-              "id": "4",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "10"
-              },
-              "type": "terms"
-            },
-            {
-              "$$hashKey": "object:8717",
-              "fake": true,
-              "field": "CONTAINER_NAME.keyword",
-              "id": "3",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "$$hashKey": "object:8718",
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "$$hashKey": "object:8715",
-              "field": "NETWORK_OUT_ERRORS",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "refId": "A",
-          "timeField": "TIMESTAMP"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Outward Network Traffic - Errors",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "es_metricbeat_docker_network",
-      "fill": 1,
-      "gridPos": {
-        "h": 3,
-        "w": 7,
-        "x": 0,
-        "y": 15
+        "y": 14
       },
       "id": 10,
       "legend": {
@@ -845,7 +878,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
@@ -863,25 +896,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:8634",
           "bucketAggs": [
             {
-              "$$hashKey": "object:8667",
               "fake": true,
-              "field": "NETWORK_INTERFACE.keyword",
-              "id": "4",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "10"
-              },
-              "type": "terms"
-            },
-            {
-              "$$hashKey": "object:8643",
-              "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -892,8 +910,7 @@
               "type": "terms"
             },
             {
-              "$$hashKey": "object:8644",
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -905,22 +922,31 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:8641",
-              "field": "NETWORK_OUT_DROPPED",
+              "field": "read_ops",
+              "hide": true,
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
+            },
+            {
+              "field": "1",
+              "id": "4",
+              "meta": {},
+              "pipelineAgg": "1",
+              "settings": {},
+              "type": "derivative"
             }
           ],
+          "query": "WHERE  beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Outward Network Traffic - Dropped Packets",
+      "title": "Disk IO Read Ops Rate",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -937,7 +963,7 @@
       "yaxes": [
         {
           "decimals": null,
-          "format": "short",
+          "format": "opm",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -959,73 +985,85 @@
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "es_metricbeat_docker_network",
-      "fill": 1,
+      "columns": [
+        {
+          "text": "Avg",
+          "value": "avg"
+        }
+      ],
+      "datasource": "es_metricbeat_docker_diskio",
+      "fontSize": "100%",
       "gridPos": {
-        "h": 3,
+        "h": 7,
         "w": 7,
-        "x": 7,
-        "y": 15
+        "x": 14,
+        "y": 14
       },
-      "id": 20,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
+      "id": 18,
       "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 1,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "Total Read",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Avg",
+          "thresholds": [],
+          "type": "number",
+          "unit": "decbytes"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
       "targets": [
         {
-          "$$hashKey": "object:8782",
+          "alias": "",
           "bucketAggs": [
             {
-              "$$hashKey": "object:8815",
               "fake": true,
-              "field": "NETWORK_INTERFACE.keyword",
-              "id": "4",
+              "field": "docker_container_name.keyword",
+              "id": "3",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
-                "orderBy": "_term",
+                "orderBy": "1",
                 "size": "10"
               },
               "type": "terms"
             },
             {
-              "$$hashKey": "object:8791",
-              "fake": true,
-              "field": "CONTAINER_NAME.keyword",
-              "id": "3",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "$$hashKey": "object:8792",
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -1037,58 +1075,21 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:8789",
-              "field": "NETWORK_OUT_DROPPED",
+              "field": "read_bytes",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "refId": "A",
-          "timeField": "TIMESTAMP"
+          "query": "WHERE beat_name=$Node",
+          "refId": "C",
+          "timeField": "@timestamp"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Outward Network Traffic - Dropped Packets",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "Total Read",
+      "transform": "timeseries_aggregations",
+      "type": "table"
     }
   ],
   "refresh": "1m",
@@ -1100,21 +1101,20 @@
       {
         "allValue": null,
         "current": {
-          "text": "POTF_KPN_metricbeat",
-          "value": [
-            "POTF_KPN_metricbeat"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
-        "datasource": "es_metricbeat_docker_diskio",
+        "datasource": "es_metricbeat_docker_container",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "Node",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"BEAT_NAME.keyword\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"beat_name.keyword\"}",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
@@ -1154,7 +1154,7 @@
     ]
   },
   "timezone": "",
-  "title": "ES Metricbeat - Docker Network",
-  "uid": "0IuZYCDmk",
-  "version": 6
+  "title": "ES Metricbeat - Docker Disk IO",
+  "uid": "1MHan5Dmz",
+  "version": 1
 }

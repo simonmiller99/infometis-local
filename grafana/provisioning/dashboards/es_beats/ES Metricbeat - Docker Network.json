@@ -15,122 +15,23 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1530603174175,
+  "iteration": 1541944045105,
   "links": [],
   "panels": [
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "es_metricbeat_system_uptime",
-      "format": "dtdurationms",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 7,
-        "x": 0,
-        "y": 0
-      },
-      "id": 24,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "bucketAggs": [
-            {
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "UPTIME_DURATION_MS",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "refId": "A",
-          "timeField": "TIMESTAMP"
-        }
-      ],
-      "thresholds": "",
-      "title": "System Uptime",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
-    },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_system_core",
+      "datasource": "es_metricbeat_docker_network",
       "fill": 1,
       "gridPos": {
-        "h": 4,
+        "h": 6,
         "w": 7,
-        "x": 7,
+        "x": 0,
         "y": 0
       },
-      "id": 18,
+      "id": 4,
       "legend": {
         "avg": false,
         "current": false,
@@ -157,18 +58,30 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CORE_ID",
+              "field": "interface.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
-                "orderBy": "1",
+                "orderBy": "_term",
                 "size": "0"
               },
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -180,22 +93,22 @@
           ],
           "metrics": [
             {
-              "field": "CORE_USER_PCT",
+              "field": "in_bytes",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPU User - Per Core",
+      "title": "Inward Network Traffic - Bytes",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -211,163 +124,8 @@
       },
       "yaxes": [
         {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "es_metricbeat_system_load",
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 7,
-        "x": 0,
-        "y": 2
-      },
-      "id": 22,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "bucketAggs": [
-            {
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "LOAD_1",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "BEAT_NAME=$Node",
-          "refId": "B",
-          "timeField": "TIMESTAMP"
-        },
-        {
-          "bucketAggs": [
-            {
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "LOAD_5",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "BEAT_NAME=$Node",
-          "refId": "C",
-          "timeField": "TIMESTAMP"
-        },
-        {
-          "bucketAggs": [
-            {
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "LOAD_15",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "BEAT_NAME=$Node",
-          "refId": "D",
-          "timeField": "TIMESTAMP"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "System Load",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 2,
-          "format": "short",
+          "decimals": null,
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -393,15 +151,15 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_system_core",
+      "datasource": "es_metricbeat_docker_network",
       "fill": 1,
       "gridPos": {
-        "h": 4,
+        "h": 6,
         "w": 7,
         "x": 7,
-        "y": 4
+        "y": 0
       },
-      "id": 16,
+      "id": 8,
       "legend": {
         "avg": false,
         "current": false,
@@ -428,8 +186,8 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CORE_ID",
-              "id": "3",
+              "field": "interface.keyword",
+              "id": "4",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -438,330 +196,20 @@
               },
               "type": "terms"
             },
-            {
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "CORE_SYSTEM_PCT",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "WHERE BEAT_NAME=$Node",
-          "refId": "A",
-          "timeField": "TIMESTAMP"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU System - Per Core",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "es_metricbeat_system_cpu",
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 7,
-        "x": 0,
-        "y": 7
-      },
-      "id": 20,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "bucketAggs": [
-            {
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "CPU_TOTAL_PCT",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "BEAT_NAME=$Node",
-          "refId": "A",
-          "timeField": "TIMESTAMP"
-        },
-        {
-          "bucketAggs": [
-            {
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "CPU_USER_PCT",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "BEAT_NAME=$Node",
-          "refId": "B",
-          "timeField": "TIMESTAMP"
-        },
-        {
-          "bucketAggs": [
-            {
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "CPU_IOWAIT_PCT",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "BEAT_NAME=$Node",
-          "refId": "C",
-          "timeField": "TIMESTAMP"
-        },
-        {
-          "bucketAggs": [
-            {
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "CPU_SOFTIRQ_PCT",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "BEAT_NAME=$Node",
-          "refId": "D",
-          "timeField": "TIMESTAMP"
-        },
-        {
-          "bucketAggs": [
-            {
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "CPU_SYSTEM_PCT",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "BEAT_NAME=$Node",
-          "refId": "E",
-          "timeField": "TIMESTAMP"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "System CPU",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "es_metricbeat_system_core",
-      "fill": 1,
-      "gridPos": {
-        "h": 4,
-        "w": 7,
-        "x": 7,
-        "y": 8
-      },
-      "id": 14,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "bucketAggs": [
             {
               "fake": true,
-              "field": "CORE_ID",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
                 "orderBy": "_term",
-                "size": "10"
+                "size": "0"
               },
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -773,22 +221,22 @@
           ],
           "metrics": [
             {
-              "field": "CORE_SOFTIRQ_PCT",
+              "field": "out_bytes",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPU SoftIRQ - Per Core",
+      "title": "Outward Network Traffic - Bytes",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -804,10 +252,11 @@
       },
       "yaxes": [
         {
-          "format": "percentunit",
+          "decimals": null,
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
-          "max": "1",
+          "max": null,
           "min": "0",
           "show": true
         },
@@ -830,13 +279,13 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_system_core",
+      "datasource": "es_metricbeat_docker_network",
       "fill": 1,
       "gridPos": {
-        "h": 4,
+        "h": 6,
         "w": 7,
         "x": 0,
-        "y": 12
+        "y": 6
       },
       "id": 2,
       "legend": {
@@ -865,7 +314,19 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CORE_ID",
+              "field": "interface.keyword",
+              "id": "5",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -876,7 +337,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -888,22 +349,31 @@
           ],
           "metrics": [
             {
-              "field": "CORE_TOTAL_PCT",
+              "field": "in_packets",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "4",
+              "meta": {},
+              "pipelineAgg": "1",
+              "settings": {},
+              "type": "derivative"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPU Total - Per Core",
+      "title": "Inward Network Traffic - Packets",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -919,10 +389,11 @@
       },
       "yaxes": [
         {
-          "format": "percentunit",
+          "decimals": null,
+          "format": "short",
           "label": null,
           "logBase": 1,
-          "max": "1",
+          "max": null,
           "min": "0",
           "show": true
         },
@@ -945,13 +416,13 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_system_core",
+      "datasource": "es_metricbeat_docker_network",
       "fill": 1,
       "gridPos": {
-        "h": 4,
+        "h": 6,
         "w": 7,
         "x": 7,
-        "y": 12
+        "y": 6
       },
       "id": 12,
       "legend": {
@@ -980,8 +451,8 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CORE_ID",
-              "id": "3",
+              "field": "interface.keyword",
+              "id": "4",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -991,7 +462,19 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "fake": true,
+              "field": "docker_container_name.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -1003,22 +486,22 @@
           ],
           "metrics": [
             {
-              "field": "CORE_IOWAIT_PCT",
+              "field": "out_packets",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPU IOWait - Per Core",
+      "title": "Outward Network Traffic - Packets",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1034,10 +517,523 @@
       },
       "yaxes": [
         {
-          "format": "percentunit",
+          "decimals": null,
+          "format": "short",
           "label": null,
           "logBase": 1,
-          "max": "1",
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "es_metricbeat_docker_network",
+      "fill": 1,
+      "gridPos": {
+        "h": 3,
+        "w": 7,
+        "x": 0,
+        "y": 12
+      },
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "interface.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "docker_container_name.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "in_errors",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "WHERE beat_name=$Node",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Inward Network Traffic - Errors",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "es_metricbeat_docker_network",
+      "fill": 1,
+      "gridPos": {
+        "h": 3,
+        "w": 7,
+        "x": 7,
+        "y": 12
+      },
+      "id": 22,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "interface.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "docker_container_name.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "out_errors",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "WHERE beat_name=$Node",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Outward Network Traffic - Errors",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "es_metricbeat_docker_network",
+      "fill": 1,
+      "gridPos": {
+        "h": 3,
+        "w": 7,
+        "x": 0,
+        "y": 15
+      },
+      "id": 10,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "interface.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "docker_container_name.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "in_dropped",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "WHERE beat_name=$Node",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Inward Network Traffic - Dropped Packets",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "es_metricbeat_docker_network",
+      "fill": 1,
+      "gridPos": {
+        "h": 3,
+        "w": 7,
+        "x": 7,
+        "y": 15
+      },
+      "id": 20,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "interface.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "docker_container_name.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "out_dropped",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "WHERE beat_name=$Node",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Outward Network Traffic - Dropped Packets",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
           "min": "0",
           "show": true
         },
@@ -1068,17 +1064,18 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "es_metricbeat_system_cpu",
+        "datasource": "es_metricbeat_docker_container",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "Node",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"BEAT_NAME.keyword\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"beat_name.keyword\"}",
         "refresh": 1,
         "regex": "",
-        "sort": 1,
+        "skipUrlSync": false,
+        "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -1117,7 +1114,7 @@
     ]
   },
   "timezone": "",
-  "title": "ES Metricbeat - System CPU",
-  "uid": "YrVuk_Hmk",
+  "title": "ES Metricbeat - Docker Network",
+  "uid": "0IuZYCDmk",
   "version": 1
 }

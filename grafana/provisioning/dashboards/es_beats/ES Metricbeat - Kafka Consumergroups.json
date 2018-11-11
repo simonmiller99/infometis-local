@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1531309167014,
+  "iteration": 1541946252020,
   "links": [],
   "panels": [
     {
@@ -23,11 +23,11 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_kafka_partition",
+      "datasource": "es_metricbeat_kafka_consumergroup",
       "fill": 1,
       "gridPos": {
-        "h": 9,
-        "w": 10,
+        "h": 11,
+        "w": 14,
         "x": 0,
         "y": 0
       },
@@ -58,8 +58,8 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "TOPIC_NAME.keyword",
-              "id": "4",
+              "field": "client_id.keyword",
+              "id": "3",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -69,7 +69,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -81,32 +81,31 @@
           ],
           "metrics": [
             {
-              "field": "PARTITION_OFFSET_NEWEST",
+              "field": "offset",
               "hide": true,
               "id": "1",
-              "inlineScript": null,
               "meta": {},
               "settings": {},
               "type": "max"
             },
             {
               "field": "1",
-              "id": "5",
+              "id": "4",
               "meta": {},
               "pipelineAgg": "1",
               "settings": {},
               "type": "derivative"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node AND NOT (TOPIC_NAME LIKE _*)",
+          "query": "WHERE beat_name=$Node AND NOT(topic_name LIKE _*)",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Topic Partitions Publish Rate",
+      "title": "Topic Consumer Rate",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -122,12 +121,11 @@
       },
       "yaxes": [
         {
-          "decimals": null,
-          "format": "opm",
+          "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -147,16 +145,16 @@
     {
       "columns": [
         {
-          "text": "Max",
-          "value": "max"
+          "text": "Avg",
+          "value": "avg"
         }
       ],
-      "datasource": "es_metricbeat_kafka_partition",
+      "datasource": "es_metricbeat_kafka_consumergroup",
       "fontSize": "100%",
       "gridPos": {
-        "h": 9,
+        "h": 21,
         "w": 9,
-        "x": 10,
+        "x": 14,
         "y": 0
       },
       "id": 6,
@@ -192,6 +190,22 @@
           "unit": "short"
         },
         {
+          "alias": "Value",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Avg",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
           "alias": "",
           "colorMode": null,
           "colors": [
@@ -211,18 +225,18 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "TOPIC_NAME.keyword",
-              "id": "4",
+              "field": "id.keyword",
+              "id": "3",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
-                "orderBy": "1",
+                "orderBy": "_term",
                 "size": "0"
               },
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -234,19 +248,19 @@
           ],
           "metrics": [
             {
-              "field": "PARTITION_OFFSET_NEWEST",
+              "field": "offset",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
-      "title": "Topic Partitions Max Offset",
+      "title": "Consumergroups",
       "transform": "timeseries_aggregations",
       "type": "table"
     },
@@ -255,13 +269,13 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_kafka_partition",
+      "datasource": "es_metricbeat_kafka_consumergroup",
       "fill": 1,
       "gridPos": {
-        "h": 9,
-        "w": 10,
+        "h": 10,
+        "w": 14,
         "x": 0,
-        "y": 9
+        "y": 11
       },
       "id": 4,
       "legend": {
@@ -287,12 +301,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "",
           "bucketAggs": [
             {
               "fake": true,
-              "field": "TOPIC_NAME.keyword",
-              "id": "4",
+              "field": "client_id.keyword",
+              "id": "3",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -302,7 +315,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -314,31 +327,31 @@
           ],
           "metrics": [
             {
-              "field": "PARTITION_OFFSET_NEWEST",
+              "field": "offset",
               "hide": true,
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "avg"
+              "type": "max"
             },
             {
               "field": "1",
-              "id": "5",
+              "id": "4",
               "meta": {},
               "pipelineAgg": "1",
               "settings": {},
               "type": "derivative"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node AND (TOPIC_NAME LIKE _*)",
+          "query": "WHERE beat_name=$Node AND (topic_name LIKE _*)",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Kafka Partitions Publish Rate",
+      "title": "Kafka Cosumer Rate",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -354,7 +367,7 @@
       },
       "yaxes": [
         {
-          "format": "opm",
+          "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -374,112 +387,6 @@
         "align": false,
         "alignLevel": null
       }
-    },
-    {
-      "columns": [
-        {
-          "text": "Max",
-          "value": "max"
-        }
-      ],
-      "datasource": "es_metricbeat_kafka_partition",
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 9,
-        "w": 9,
-        "x": 10,
-        "y": 9
-      },
-      "id": 8,
-      "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": null,
-        "desc": false
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "bucketAggs": [
-            {
-              "fake": true,
-              "field": "TOPIC_NAME.keyword",
-              "id": "4",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "1",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "field": "TIMESTAMP",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "PARTITION_OFFSET_OLDEST",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "WHERE BEAT_NAME=$Node",
-          "refId": "A",
-          "timeField": "TIMESTAMP"
-        }
-      ],
-      "title": "Topic Partitions Min Offset",
-      "transform": "timeseries_aggregations",
-      "type": "table"
     }
   ],
   "refresh": "1m",
@@ -491,21 +398,20 @@
       {
         "allValue": null,
         "current": {
-          "text": "POTF_KPN_metricbeat",
-          "value": [
-            "POTF_KPN_metricbeat"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
-        "datasource": "es_metricbeat_kafka_partition",
+        "datasource": "es_metricbeat_kafka_consumergroup",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "Node",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"BEAT_NAME.keyword\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"beat_name.keyword\"}",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
@@ -545,7 +451,7 @@
     ]
   },
   "timezone": "",
-  "title": "ES Metricbeat - Kafka Partitions",
-  "uid": "48D3D5Hmk",
+  "title": "ES Metricbeat - Kafka Consumergroups",
+  "uid": "TWcsb5Hmk",
   "version": 1
 }

@@ -1,4 +1,40 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_ES_METRICBEAT_DOCKER_DISKIO",
+      "label": "es_metricbeat_docker_diskio",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "elasticsearch",
+      "pluginName": "Elasticsearch"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "datasource",
+      "id": "elasticsearch",
+      "name": "Elasticsearch",
+      "version": "5.0.0"
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "5.2.3"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": "5.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": "5.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -15,6 +51,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "id": null,
+  "iteration": 1541942340861,
   "links": [],
   "panels": [
     {
@@ -22,7 +60,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_docker_diskio",
+      "datasource": "${DS_ES_METRICBEAT_DOCKER_DISKIO}",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -54,10 +92,11 @@
       "steppedLine": false,
       "targets": [
         {
+          "alias": "beat_name",
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -68,7 +107,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -80,7 +119,7 @@
           ],
           "metrics": [
             {
-              "field": "DISKIO_WRITE_BYTES",
+              "field": "total",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -96,8 +135,9 @@
               "type": "derivative"
             }
           ],
+          "query": "WHERE  beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -146,7 +186,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_docker_diskio",
+      "datasource": "${DS_ES_METRICBEAT_DOCKER_DISKIO}",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -181,7 +221,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -192,7 +232,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -204,7 +244,7 @@
           ],
           "metrics": [
             {
-              "field": "DISKIO_SUMMARY_OPS",
+              "field": "summary_ops",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -220,8 +260,9 @@
               "type": "derivative"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -272,7 +313,7 @@
           "value": "avg"
         }
       ],
-      "datasource": "es_metricbeat_docker_diskio",
+      "datasource": "${DS_ES_METRICBEAT_DOCKER_DISKIO}",
       "fontSize": "100%",
       "gridPos": {
         "h": 7,
@@ -333,7 +374,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -344,7 +385,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -356,15 +397,16 @@
           ],
           "metrics": [
             {
-              "field": "DISKIO_SUMMARY_BYTES",
+              "field": "summary_bytes",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Total Data",
@@ -376,7 +418,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_docker_diskio",
+      "datasource": "${DS_ES_METRICBEAT_DOCKER_DISKIO}",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -411,7 +453,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -422,7 +464,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -434,7 +476,7 @@
           ],
           "metrics": [
             {
-              "field": "DISKIO_WRITE_BYTES",
+              "field": "write_bytes",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -450,8 +492,9 @@
               "type": "derivative"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -500,7 +543,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_docker_diskio",
+      "datasource": "${DS_ES_METRICBEAT_DOCKER_DISKIO}",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -535,7 +578,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -546,7 +589,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -558,7 +601,7 @@
           ],
           "metrics": [
             {
-              "field": "DISKIO_WRITE_OPS",
+              "field": "write_ops",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -574,8 +617,9 @@
               "type": "derivative"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -626,7 +670,7 @@
           "value": "avg"
         }
       ],
-      "datasource": "es_metricbeat_docker_diskio",
+      "datasource": "${DS_ES_METRICBEAT_DOCKER_DISKIO}",
       "fontSize": "100%",
       "gridPos": {
         "h": 7,
@@ -687,7 +731,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -698,7 +742,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -710,15 +754,16 @@
           ],
           "metrics": [
             {
-              "field": "DISKIO_WRITE_BYTES",
+              "field": "write_bytes",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Total Write",
@@ -730,7 +775,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_docker_diskio",
+      "datasource": "${DS_ES_METRICBEAT_DOCKER_DISKIO}",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -762,10 +807,11 @@
       "steppedLine": false,
       "targets": [
         {
+          "alias": "",
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -776,7 +822,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -788,7 +834,7 @@
           ],
           "metrics": [
             {
-              "field": "DISKIO_READ_BYTES",
+              "field": "read_bytes",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -804,8 +850,9 @@
               "type": "derivative"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -854,7 +901,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "es_metricbeat_docker_diskio",
+      "datasource": "${DS_ES_METRICBEAT_DOCKER_DISKIO}",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -889,7 +936,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -900,7 +947,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -912,7 +959,7 @@
           ],
           "metrics": [
             {
-              "field": "DISKIO_READ_OPS",
+              "field": "read_ops",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -928,8 +975,9 @@
               "type": "derivative"
             }
           ],
+          "query": "WHERE  beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -980,7 +1028,7 @@
           "value": "avg"
         }
       ],
-      "datasource": "es_metricbeat_docker_diskio",
+      "datasource": "${DS_ES_METRICBEAT_DOCKER_DISKIO}",
       "fontSize": "100%",
       "gridPos": {
         "h": 7,
@@ -1041,7 +1089,7 @@
           "bucketAggs": [
             {
               "fake": true,
-              "field": "CONTAINER_NAME.keyword",
+              "field": "docker_container_name.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
@@ -1052,7 +1100,7 @@
               "type": "terms"
             },
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -1064,15 +1112,16 @@
           ],
           "metrics": [
             {
-              "field": "DISKIO_READ_BYTES",
+              "field": "read_bytes",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Total Read",
@@ -1088,21 +1137,15 @@
     "list": [
       {
         "allValue": null,
-        "current": {
-          "tags": [],
-          "text": "POTF_KPN_metricbeat",
-          "value": [
-            "POTF_KPN_metricbeat"
-          ]
-        },
-        "datasource": "es_metricbeat_docker_diskio",
+        "current": {},
+        "datasource": "${DS_ES_METRICBEAT_DOCKER_DISKIO}",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "Node",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"BEAT_NAME.keyword\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"beat_name.keyword\"}",
         "refresh": 1,
         "regex": "",
         "sort": 0,

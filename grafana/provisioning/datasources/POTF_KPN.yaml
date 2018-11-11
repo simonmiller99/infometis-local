@@ -12,7 +12,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true   
@@ -27,7 +27,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true   
@@ -42,7 +42,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true   
@@ -57,7 +57,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true   
@@ -72,7 +72,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true   
@@ -87,7 +87,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true 
@@ -102,7 +102,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true 
@@ -117,7 +117,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -132,7 +132,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true 
@@ -147,7 +147,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true 
@@ -162,7 +162,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true 
@@ -177,7 +177,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true 
@@ -192,7 +192,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true 
@@ -207,7 +207,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true 
@@ -222,7 +222,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -237,7 +237,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -252,7 +252,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -267,7 +267,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -282,7 +282,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -297,7 +297,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -312,7 +312,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -327,7 +327,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -342,7 +342,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -357,7 +357,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -372,7 +372,7 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true
@@ -387,7 +387,67 @@ datasources:
   jsonData:
     esVersion: 5
     interval: 
-    timeField: TIMESTAMP
+    timeField: "@timestamp"
+    timeInterval: 60s
+  version: 1
+  editable: true
+  
+- name: es_winlogbeat
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_winlogbeat"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: "@timestamp"
+    timeInterval: 60s
+  version: 1
+  editable: true
+  
+- name: es_winlogbeat_webevent
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "es_winlogbeat_webevent"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: "@timestamp"
+    timeInterval: 60s
+  version: 1
+  editable: true
+
+- name: in-filebeat-ab7-completed
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "in-filebeat-ab7-completed"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: "@timestamp"
+    timeInterval: 60s
+  version: 1
+  editable: true 
+
+- name: in-filebeat-ab7-processed
+  type: elasticsearch
+  access: proxy
+  orgId: 1
+  url: http://elasticsearch:9200
+  database: "in-filebeat-ab7-processed"
+  isDefault: false
+  jsonData:
+    esVersion: 5
+    interval: 
+    timeField: "@timestamp"
     timeInterval: 60s
   version: 1
   editable: true 

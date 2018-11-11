@@ -2,7 +2,6 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:1272",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -16,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1530469710370,
+  "iteration": 1541945699430,
   "links": [],
   "panels": [
     {
@@ -57,12 +55,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:1330",
           "alias": "Bytes In",
           "bucketAggs": [
             {
-              "$$hashKey": "object:1340",
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -74,8 +70,7 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:1337",
-              "field": "NETWORK_IN_BYTES",
+              "field": "in_bytes",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -83,7 +78,6 @@
               "type": "max"
             },
             {
-              "$$hashKey": "object:1451",
               "field": "1",
               "id": "3",
               "meta": {},
@@ -92,17 +86,15 @@
               "type": "derivative"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
-          "$$hashKey": "object:1463",
           "alias": "Bytes Out",
           "bucketAggs": [
             {
-              "$$hashKey": "object:1472",
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -114,8 +106,7 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:1470",
-              "field": "NETWORK_OUT_BYTES",
+              "field": "out_bytes",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -123,7 +114,6 @@
               "type": "max"
             },
             {
-              "$$hashKey": "object:1488",
               "field": "1",
               "id": "3",
               "meta": {},
@@ -132,9 +122,9 @@
               "type": "derivative"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -156,7 +146,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:1398",
           "decimals": null,
           "format": "decbytes",
           "label": null,
@@ -166,7 +155,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:1399",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -217,12 +205,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:1563",
           "alias": "In Dropped",
           "bucketAggs": [
             {
-              "$$hashKey": "object:1573",
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -234,25 +220,22 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:1570",
-              "field": "NETWORK_IN_DROPPED",
+              "field": "in_dropped",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
-          "$$hashKey": "object:1618",
           "alias": "In Errors",
           "bucketAggs": [
             {
-              "$$hashKey": "object:1627",
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -264,24 +247,22 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:1625",
-              "field": "NETWORK_IN_ERRORS",
+              "field": "in_errors",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
-          "$$hashKey": "object:1643",
           "alias": "Out Dropped",
           "bucketAggs": [
             {
-              "$$hashKey": "object:1652",
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -293,24 +274,22 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:1650",
-              "field": "NETWORK_OUT_DROPPED",
+              "field": "out_dropped",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
-          "$$hashKey": "object:1668",
           "alias": "Out Errors",
           "bucketAggs": [
             {
-              "$$hashKey": "object:1677",
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -322,16 +301,16 @@
           ],
           "metrics": [
             {
-              "$$hashKey": "object:1675",
-              "field": "NETWORK_OUT_ERRORS",
+              "field": "out_errors",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
+          "query": "WHERE beat_name=$Node",
           "refId": "D",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -353,7 +332,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:1699",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -362,7 +340,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:1700",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -386,22 +363,21 @@
       {
         "allValue": null,
         "current": {
-          "text": "POTF_KPN_metricbeat",
-          "value": [
-            "POTF_KPN_metricbeat"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
-        "datasource": "es_metricbeat_docker_cpu",
+        "datasource": "es_metricbeat_system_network",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "Node",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"BEAT_NAME.keyword\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"beat_name.keyword\"}",
         "refresh": 1,
         "regex": "",
-        "sort": 1,
+        "skipUrlSync": false,
+        "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -442,5 +418,5 @@
   "timezone": "",
   "title": "ES Metricbeat - System Network",
   "uid": "2ISjv2vik",
-  "version": 2
+  "version": 1
 }

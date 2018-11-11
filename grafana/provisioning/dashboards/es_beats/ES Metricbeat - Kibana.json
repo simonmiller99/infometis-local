@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1530212416050,
+  "iteration": 1541946393214,
   "links": [],
   "panels": [
     {
@@ -63,7 +63,7 @@
           "alias": "Request Rate",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -75,22 +75,22 @@
           ],
           "metrics": [
             {
-              "field": "REQUEST_TOTAL",
+              "field": "metrics_requests_total",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Request Disconnects",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -102,22 +102,22 @@
           ],
           "metrics": [
             {
-              "field": "REQUEST_DISCONNECTS",
+              "field": "metrics_requests_disconnects",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Connections",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -129,16 +129,16 @@
           ],
           "metrics": [
             {
-              "field": "CONCURRENT_CONNECTIONS",
+              "field": "metrics_concurrent_connections",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -190,7 +190,6 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -201,9 +200,10 @@
         "multi": true,
         "name": "Node",
         "options": [],
-        "query": "{\"find\": \"terms\",\"field\": \"BEAT_NAME.keyword\"}",
+        "query": "{\"find\": \"terms\",\"field\": \"beat_name.keyword\"}",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
         "tags": [],

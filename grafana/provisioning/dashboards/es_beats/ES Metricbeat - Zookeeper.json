@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1530457307099,
+  "iteration": 1541945590115,
   "links": [],
   "panels": [
     {
@@ -67,7 +67,7 @@
           "alias": "Sent Rate",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -79,7 +79,7 @@
           ],
           "metrics": [
             {
-              "field": "PACKETS_SENT",
+              "field": "packets_sent",
               "hide": true,
               "id": "4",
               "meta": {},
@@ -95,15 +95,15 @@
               "type": "derivative"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Receive Rate",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -115,7 +115,7 @@
           ],
           "metrics": [
             {
-              "field": "PACKETS_RECEIVED",
+              "field": "packets_received",
               "hide": true,
               "id": "1",
               "meta": {},
@@ -131,9 +131,9 @@
               "type": "derivative"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -243,7 +243,7 @@
           "alias": "Store Size",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -255,16 +255,16 @@
           ],
           "metrics": [
             {
-              "field": "APPROXIMATE_DATA_SIZE",
+              "field": "approximate_data_size",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Data Store",
@@ -338,7 +338,7 @@
           "alias": "Watch",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -350,22 +350,22 @@
           ],
           "metrics": [
             {
-              "field": "WATCH_COUNT",
+              "field": "watch_count",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_nameE=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Znode",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -377,22 +377,22 @@
           ],
           "metrics": [
             {
-              "field": "ZNODE_COUNT",
+              "field": "znode_count",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_nameE=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Ephemerals",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -404,22 +404,22 @@
           ],
           "metrics": [
             {
-              "field": "EPHEMERALS_COUNT",
+              "field": "ephemerals_count",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_nameE=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Connections",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -431,22 +431,22 @@
           ],
           "metrics": [
             {
-              "field": "NUM_ALIVE_CONNECTIONS",
+              "field": "num_alive_connections",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_nameE=$Node",
           "refId": "D",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "OUtstanding Requests",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -458,16 +458,16 @@
           ],
           "metrics": [
             {
-              "field": "OUTSTANDING_REQUESTS",
+              "field": "outstanding_requests",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_nameE=$Node",
           "refId": "E",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Counts",
@@ -541,7 +541,7 @@
           "alias": "Received",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -553,22 +553,22 @@
           ],
           "metrics": [
             {
-              "field": "PACKETS_RECEIVED",
+              "field": "packets_received",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Sent",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -580,16 +580,16 @@
           ],
           "metrics": [
             {
-              "field": "PACKETS_SENT",
+              "field": "packets_sent",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Packets",
@@ -641,7 +641,7 @@
           "alias": "Average Latency",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -653,7 +653,7 @@
           ],
           "metrics": [
             {
-              "field": "LATENCY_AVG",
+              "field": "latency_avg",
               "id": "1",
               "meta": {},
               "pipelineAgg": "select metric",
@@ -661,15 +661,15 @@
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE bet_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Outstanding Requests",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -681,22 +681,22 @@
           ],
           "metrics": [
             {
-              "field": "OUTSTANDING_REQUESTS",
+              "field": "outstanding_requests",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Connections",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -708,22 +708,22 @@
           ],
           "metrics": [
             {
-              "field": "NUM_ALIVE_CONNECTIONS",
+              "field": "num_alive_connections",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Watch Count",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -735,16 +735,16 @@
           ],
           "metrics": [
             {
-              "field": "WATCH_COUNT",
+              "field": "watch_count",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "E",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "thresholds": [],
@@ -854,7 +854,7 @@
           "alias": "Average",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -866,22 +866,22 @@
           ],
           "metrics": [
             {
-              "field": "LATENCY_AVG",
+              "field": "latency_avg",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Maximum",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -893,22 +893,22 @@
           ],
           "metrics": [
             {
-              "field": "LATENCY_MAX",
+              "field": "latency_max",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Minimum",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -920,16 +920,16 @@
           ],
           "metrics": [
             {
-              "field": "LATENCY_MIN",
+              "field": "latency_min",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_name=$Node",
           "refId": "C",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "Latency",
@@ -1003,7 +1003,7 @@
           "alias": "Maximum",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -1015,22 +1015,22 @@
           ],
           "metrics": [
             {
-              "field": "MAX_FILE_DESCRIPTOR_COUNT",
+              "field": "max_file_descriptor_count",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_nameE=$Node",
           "refId": "A",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         },
         {
           "alias": "Open",
           "bucketAggs": [
             {
-              "field": "TIMESTAMP",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -1042,16 +1042,16 @@
           ],
           "metrics": [
             {
-              "field": "OPEN_FILE_DESCRIPTOR_COUNT",
+              "field": "open_file_descriptor_count",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "avg"
             }
           ],
-          "query": "WHERE BEAT_NAME=$Node",
+          "query": "WHERE beat_nameE=$Node",
           "refId": "B",
-          "timeField": "TIMESTAMP"
+          "timeField": "@timestamp"
         }
       ],
       "title": "File Descriptors",
@@ -1068,10 +1068,8 @@
       {
         "allValue": null,
         "current": {
-          "text": "POTF_KPN_metricbeat",
-          "value": [
-            "POTF_KPN_metricbeat"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "es_metricbeat_zookeeper",
         "hide": 0,
@@ -1080,9 +1078,10 @@
         "multi": true,
         "name": "Node",
         "options": [],
-        "query": "{\"find\": \"terms\", \"field\": \"BEAT_NAME.keyword\"}",
+        "query": "{\"find\": \"terms\", \"field\": \"beat_name.keyword\"}",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
