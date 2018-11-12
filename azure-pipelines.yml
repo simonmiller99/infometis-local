@@ -20,14 +20,14 @@ steps:
     cd filebeat-docker
     docker build -t $(registry)/filebeat:docker . --build-arg REGISTRY=$(registry)
     docker push $(registry)/filebeat:docker
-  displayName: ''Build & Push filebeat:docker image'
+  displayName: 'Build & Push filebeat:docker image'
 
 # Build image - grafana local
 - script: |
     cd grafana
     docker build -t $(registry)/grafana:local . --build-arg REGISTRY=$(registry)
     docker push $(registry)/grafana:local
-  displayName: ''Build & Push grafana:local image'
+  displayName: 'Build & Push grafana:local image'
 
 # Build image - kibana local 
 - script: |
@@ -48,18 +48,18 @@ steps:
     cd streamsets-dev
     docker build -t $(registry)/streamsets:dev . --build-arg REGISTRY=$(registry)
     docker push $(registry)/streamsets:dev
-  displayName: ''Build & Push streamsets:dev image'
+  displayName: 'Build & Push streamsets:dev image'
 
 # Build image - streamsets local 
 - script: |
     cd streamsets-local
     docker build -t $(registry)/streamsets:local . --build-arg REGISTRY=$(registry)
     docker push $(registry)/streamsets:local
-  displayName: ''Build & Push streamsets:local image'
+  displayName: 'Build & Push streamsets:local image'
 
 # Build main container image - infometis-local
 - script: |
     cd $(imageName)
     docker build -t $(registry)/$(imageName):$(imageTag) .
     docker push $(registry)/$(imageName):$(imageTag)
-  displayName: ''Build & Push main image'
+  displayName: 'Build & Push main image'
