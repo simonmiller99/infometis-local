@@ -1,0 +1,111 @@
+---
+version: '3'
+services:
+  zookeeper:
+    image: vc11web/zookeeper:base
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - '32181:32181'
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 32181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: vc11web/kafka:base
+    hostname: kafka
+    container_name: kafka
+    ports:
+      - '9092:9092'
+      - '29092:29092'
+    environment:
+      KAFKA_HEAP_OPTS: "-Xmx512m -Xms512m"
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:32181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG_RETENTION_HOURS: 1
+      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka:29092
+      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:32181
+      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+      CONFLUENT_METRICS_ENABLE: 'true'
+      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
+
+  kafka-manager:
+    image: vc11web/kafka-manager:base
+    hostname: kafka-manager
+    container_name: kafka-manager
+    ports:
+      - "9000:9000"
+    environment:
+      ZK_HOSTS: zookeeper:32181
+      APPLICATION_SECRET: letmein
+      KM_ARGS: -Djava.net.preferIPv4Stack=true
+
+  streamsets-local:
+    image: vc11web/streamsets:local
+    hostname: streamsets-local
+    container_name: streamsets-local
+    ports:
+      - '18631:18630'
+    volumes:
+      - /var/lib/docker/containers:/hostfs/var/lib/docker/containers:rw
+    environment:
+      NO_PROXY: "elasticsearch, kafka, kafka-connect-ui"
+      no_proxy: "elasticsearch, kafka, kafka-connect-ui"
+
+  streamsets:
+    image: vc11web/streamsets:dev
+    hostname: streamsets
+    container_name: streamsets
+    ports:
+      - '18630:18630'
+    volumes:
+      - /var/lib/docker/containers:/hostfs/var/lib/docker/containers:rw
+    environment:
+      SDC_JAVA_OPTS: "-Xmx512m -Xms512m "
+      NO_PROXY: "elasticsearch, kafka, kafka-connect-ui"
+      no_proxy: "elasticsearch, kafka, kafka-connect-ui"
+
+  elasticsearch:
+    image: vc11web/elasticsearch:base
+    hostname: elasticsearch
+    container_name: elasticsearch
+    environment:
+      - clustername=elastic-kafka
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+  kibana:
+    image: vc11web/kibana:local
+    hostname: kibana
+    container_name: kibana
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - 5601:5601
+
+  grafana:
+    image: vc11web/grafana:local
+    hostname: grafana
+    container_name: grafana
+    environment:
+      GF_LOG_FORMAT: json
+      GF_LOG_FILE_FORMAT: json
+      GF_LOG_CONSOLE_FORMAT: json
+      GF_LOG_SYSLOG_FORMAT: json
+      GF_LOG_LEVEL: warn
+    ports:
+      - 3000:3000
