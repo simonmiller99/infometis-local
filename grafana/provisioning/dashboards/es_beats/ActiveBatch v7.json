@@ -1,4 +1,54 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_IN-FILEBEAT-AB7-PROCESSED",
+      "label": "in-filebeat-ab7-processed",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "elasticsearch",
+      "pluginName": "Elasticsearch"
+    },
+    {
+      "name": "DS_IN-FILEBEAT-AB7-COMPLETED",
+      "label": "in-filebeat-ab7-completed",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "elasticsearch",
+      "pluginName": "Elasticsearch"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "datasource",
+      "id": "elasticsearch",
+      "name": "Elasticsearch",
+      "version": "5.0.0"
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "5.2.3"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": "5.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": "5.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": "5.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -15,6 +65,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "id": null,
   "links": [],
   "panels": [
     {
@@ -26,7 +77,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "in-filebeat-ab7-processed",
+      "datasource": "${DS_IN-FILEBEAT-AB7-PROCESSED}",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -123,7 +174,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "in-filebeat-ab7-processed",
+      "datasource": "${DS_IN-FILEBEAT-AB7-PROCESSED}",
       "fill": 3,
       "gridPos": {
         "h": 4,
@@ -142,7 +193,7 @@
         "values": false
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
@@ -202,7 +253,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -226,7 +277,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "in-filebeat-ab7-processed",
+      "datasource": "${DS_IN-FILEBEAT-AB7-PROCESSED}",
       "fill": 3,
       "gridPos": {
         "h": 4,
@@ -245,7 +296,7 @@
         "values": false
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
@@ -305,7 +356,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -327,7 +378,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "in-filebeat-ab7-processed",
+      "datasource": "${DS_IN-FILEBEAT-AB7-PROCESSED}",
       "fill": 3,
       "gridPos": {
         "h": 4,
@@ -346,7 +397,7 @@
         "values": false
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
@@ -406,7 +457,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -425,15 +476,16 @@
     },
     {
       "columns": [],
-      "datasource": "in-filebeat-ab7-completed",
+      "datasource": "${DS_IN-FILEBEAT-AB7-COMPLETED}",
       "fontSize": "100%",
       "gridPos": {
-        "h": 19,
+        "h": 9,
         "w": 9,
         "x": 0,
         "y": 4
       },
-      "id": 10,
+      "id": 12,
+      "links": [],
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -460,7 +512,7 @@
           "pattern": "/.*/",
           "thresholds": [],
           "type": "number",
-          "unit": "dthms"
+          "unit": "short"
         }
       ],
       "targets": [
@@ -469,7 +521,7 @@
             {
               "fake": true,
               "field": "job.keyword",
-              "id": "4",
+              "id": "3",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -498,11 +550,12 @@
               "type": "max"
             }
           ],
+          "query": "level = 'ERROR'",
           "refId": "A",
           "timeField": "@timestamp"
         }
       ],
-      "title": "Panel Title",
+      "title": "Errors",
       "transform": "timeseries_to_rows",
       "type": "table"
     },
@@ -511,7 +564,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "in-filebeat-ab7-completed",
+      "datasource": "${DS_IN-FILEBEAT-AB7-COMPLETED}",
       "fill": 1,
       "gridPos": {
         "h": 19,
@@ -619,6 +672,89 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "columns": [],
+      "datasource": "${DS_IN-FILEBEAT-AB7-COMPLETED}",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 10,
+        "w": 9,
+        "x": 0,
+        "y": 13
+      },
+      "id": 10,
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "dthms"
+        }
+      ],
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "job.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 1,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "elapsedTime",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "Panel Title",
+      "transform": "timeseries_to_rows",
+      "type": "table"
     }
   ],
   "refresh": "30s",
@@ -660,5 +796,5 @@
   "timezone": "",
   "title": "ActiveBatch v7",
   "uid": "E_1w4eaiz",
-  "version": 1
+  "version": 3
 }
