@@ -10,7 +10,7 @@
 #==========================  Modules configuration ============================
 
 name: POTF_KPN_metricbeat2
-
+ 
 metricbeat.modules:
 
 - module: docker
