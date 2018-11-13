@@ -42,11 +42,20 @@ docker image rm --force vc11web/grafana:local
 
 docker-compose -f docker-compose-config.yml up -d
 
+# import pipelines in streamsets and streamsets-local
+# import saved objects in kibana
+# log into grafana
+# register kafka in kafka-manager
+
 docker commit elasticsearch vc11web/elasticsearch:local
+docker commit grafana vc11web/grafana:local
+docker commit kafka-manager vc11web/kafka-manager:local
 docker commit streamsets vc11web/streamsets:dev
 docker commit streamsets-local vc11web/streamsets:local
 
 docker-compose up -d
+
+# tag images under hvbnext account
 
 docker tag vc11web/infometis-local:v1 hvbnext/infometis-local:v1
 docker tag vc11web/zookeeper:base hvbnext/zookeeper:base
