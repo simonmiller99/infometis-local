@@ -21,7 +21,7 @@ steps:
     cd elasticsearch_$(imageName)
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
-    docker build -t $(destinationRegistry)/kafka:$(imageName)_$(imageTag) . \
+    docker build -t $(destinationRegistry)/elasticsearch:$(imageName)_$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
