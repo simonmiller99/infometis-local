@@ -20,14 +20,14 @@ steps:
     cd filebeat_infometis-local_docker
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
-    docker build -t $(destinationRegistry)/filebeat:$(imageName)_(imageTag)_docker . \
+    docker build -t $(destinationRegistry)/filebeat:$(imageName)_$(imageTag)_docker . \
       --build-arg REGISTRY=$(destinationRegistry) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=InfoMetis Local - Filebeat Docker" \
       --label "$(labelNamespace).description=This image consumes the JSON log file of the docker instance for InfoMetis Local" \
-      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/filebeat:$(imageName)_(imageTag)_docker --help" \
-      --label "$(labelNamespace).image.name=$(destinationRegistry)/filebeat:$(imageName)_(imageTag)_docker" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/filebeat:$(imageName)_$(imageTag)_docker --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/filebeat:$(imageName)_$(imageTag)_docker" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
       --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
@@ -73,6 +73,24 @@ steps:
   displayName: 'Build & Push kafka:infometis_local image'
 
 # kafka-manager
+# Build image - kafka-manager:infometis-local
+- script: |
+    cd kafka_infometis-local
+    buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
+    buildDate="${buildDate:0:23}${buildDate:29:6}"
+    docker build -t $(destinationRegistry)/kafka-manager:$(imageName)_$(imageTag) . \
+      --build-arg REGISTRY=$(destinationRegistry) \
+      --label "$(labelNamespace).schema-version=1.0" \
+      --label "$(labelNamespace).build-date=$buildDate" \
+      --label "$(labelNamespace).name=InfoMetis Local - Kafka Manager" \
+      --label "$(labelNamespace).description=This image contains a simple Kafka Manager for InfoMetis Local" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/kafka-manager:$(imageName)_$(imageTag) --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/kafka-manager:$(imageName)_$(imageTag)" \
+      --label "$(labelNamespace).image.type=component" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+    docker push $(registry)/kafka-manager:$(imageName)_$(imageTag)
+  displayName: 'Build & Push kafka-manager:infometis_local image'
 
 # Build image - kibana local 
 #- script: |
