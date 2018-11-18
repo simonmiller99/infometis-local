@@ -31,8 +31,8 @@ steps:
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
       --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
-    docker push $(registry)/filebeat:infometis-local_docker
-  displayName: 'Build & Push filebeat:infometis-local_docker image'
+    docker push $(registry)/filebeat:$(imageName)_$(imageTag)_docker
+  displayName: 'Build & Push filebeat:$(imageName)_$(imageTag)_docker image'
 
 # Build image - grafana:infometis-local
 - script: |
