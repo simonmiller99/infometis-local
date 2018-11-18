@@ -75,7 +75,7 @@ steps:
 
 # Build image - kafka-manager:$(imageName)_$(imageTag)
 - script: |
-    cd kafka_$(imageName)
+    cd kafka-manager_$(imageName)
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/kafka-manager:$(imageName)_$(imageTag) . \
@@ -94,14 +94,14 @@ steps:
 
 # Build image - kibana:$(imageName)_$(imageTag)
 - script: |
-    cd kafka_$(imageName)
+    cd kibana_$(imageName)
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/kibana:$(imageName)_$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
-      --label "$(labelNamespace).name=$(imageLabel) - Kafka Manager" \
+      --label "$(labelNamespace).name=$(imageLabel) - Kibana" \
       --label "$(labelNamespace).description=This image contains pre-installed ElasticSearch Kibana for $(imageLabel)" \
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/kibana:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/kibana:$(imageName)_$(imageTag)" \
@@ -189,7 +189,6 @@ steps:
     docker push $(registry)/streamsets:$(imageName)_$(imageTag)
   displayName: 'Build & Push streamsets:$(imageName)_$(imageTag) image'
 
-# zookeeper
 # Build image - zookeeper:$(imageName)_$(imageTag)
 - script: |
     cd zookeeper_$(imageName)
@@ -209,9 +208,20 @@ steps:
     docker push $(registry)/zookeeper:$(imageName)_$(imageTag)
   displayName: 'Build & Push zookeeper:$(imageName)_$(imageTag) image'
 
-# Build main container image - infometis-local
-#- script: |
-#    cd $(imageName)
-#    docker build -t $(registry)/$(imageName):$(imageTag) . --build-arg REGISTRY=$(registry)
-#    docker push $(registry)/$(imageName):$(imageTag)
-#  displayName: 'Build & Push main image'
+# Build image - $(imageName):$(imageTag)
+- script: |
+    cd $(imageName)_$(imageTag)
+    buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
+    buildDate="${buildDate:0:23}${buildDate:29:6}"
+    docker build -t $(destinationRegistry)/$(imageName):$(imageTag) . \
+      --build-arg REGISTRY=$(destinationRegistry) \
+      --label "$(labelNamespace).schema-version=1.0" \
+      --label "$(labelNamespace).build-date=$buildDate" \
+      --label "$(labelNamespace).name=$(imageLabel)" \
+      --label "$(labelNamespace).description=This image contains $(imageLabel) self-monitoring stream processing dev stack" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/$(imageName):$(imageTag) --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/$(imageName):$(imageTag)" \
+      --label "$(labelNamespace).image.type=solution" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+    docker push $(registry)/$(imageName):$(imageTag)
+  displayName: 'Build & Push $(imageName):$(imageTag) image'
