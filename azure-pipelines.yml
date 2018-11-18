@@ -12,7 +12,7 @@ variables:
   imageTag: 'v1'
 
 steps:
-- script: docker login -u $(registry) -p $(dockerpwd) 
+- script: docker login -u $(registry) -p $(destinationRegistryPwd) 
   displayName: 'docker login'
 
 # Build image - filebeat infometis-local_docker
