@@ -1,9 +1,4 @@
-###################### Filebeat Configuration Example #########################
-
-# Check filebeat.reference.yml in TaskInstaller/Configuration folder
-# for full set of available settings and configuration info
-
-#=========================== Filebeat prospectors =============================
+name: filbeat_infometis-local_docker
 
 filebeat.prospectors:
 - input_type: log
@@ -15,20 +10,10 @@ filebeat.prospectors:
 #  json.overwrite_keys: true  
 #  json.message_key: log   
   
-#============================= Filebeat modules ===============================
-
-#filebeat.config.modules:
-#  path: ${path.config}/modules.d/*.yml
-#  reload.enabled: false
-
 #==================== Elasticsearch template setting ==========================
 
 setup.template.settings:
   index.number_of_shards: 3
-
-#================================ General =====================================
-
-#d
 
 #============================== Dashboards =====================================
 

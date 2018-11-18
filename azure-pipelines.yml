@@ -15,7 +15,7 @@ steps:
 - script: docker login -u $(registry) -p $(destinationRegistryPwd) 
   displayName: 'docker login'
 
-# Build image - filebeat infometis-local_docker
+# Build image - filebeat:infometis-local_docker
 - script: |
     cd filebeat_infometis-local_docker
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
@@ -24,7 +24,7 @@ steps:
       --build-arg REGISTRY=$(destinationRegistry) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
-      --label "$(labelNamespace).name=InfoMeis Local - Filebeat Docker" \
+      --label "$(labelNamespace).name=InfoMetis Local - Filebeat Docker" \
       --label "$(labelNamespace).description=This image consumes the JSON log file of the docker instance for InfoMetis Local" \
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/filebeat:infometis-local_docker --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/filebeat:infometis-local_docker" \
@@ -34,12 +34,24 @@ steps:
     docker push $(registry)/filebeat:infometis-local_docker
   displayName: 'Build & Push filebeat:infometis-local_docker image'
 
-# Build image - grafana local
-#- script: |
-#    cd grafana
-#    docker build -t $(registry)/grafana:local . --build-arg REGISTRY=$(registry)
-#    docker push $(registry)/grafana:local
-#  displayName: 'Build & Push grafana:local image'
+# Build image - grafana:infometis_local
+- script: |
+    cd grafana:infometis_local
+    buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
+    buildDate="${buildDate:0:23}${buildDate:29:6}"
+    docker build -t $(destinationRegistry)/grafana:infometis_local . \
+      --build-arg REGISTRY=$(destinationRegistry) \
+      --label "$(labelNamespace).schema-version=1.0" \
+      --label "$(labelNamespace).build-date=$buildDate" \
+      --label "$(labelNamespace).name=InfoMetis Local - Grafana" \
+      --label "$(labelNamespace).description=This image contains the metric dashboards for InfoMetis Local" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/grafana:infometis_local --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/grafana:infometis_local" \
+      --label "$(labelNamespace).image.type=component" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).image.base.name=$(destinationRegistry)/grafana:base"
+    docker push $(registry)/grafana:infometis_local
+  displayName: 'Build & Push grafana:infometis_local image'
 
 # kafka
 
