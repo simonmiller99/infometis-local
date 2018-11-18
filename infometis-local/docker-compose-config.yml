@@ -45,65 +45,66 @@ services:
       APPLICATION_SECRET: letmein
       KM_ARGS: -Djava.net.preferIPv4Stack=true
 
-#  streamsets-local:
-#    image: ${registry}/streamsets:local
-#    hostname: streamsets-local
-#    container_name: streamsets-local
-#    ports:
-#      - '18631:18630'
-#    volumes:
-#      - /var/lib/docker/containers:/hostfs/var/lib/docker/containers:rw
+  streamsets-local:
+    image: ${registry}/streamsets:${solutionName}_${solutionVersion}
+    hostname: streamsets-local
+    container_name: streamsets-local
+    ports:
+      - '18631:18630'
+    volumes:
+      - /var/lib/docker/containers:/hostfs/var/lib/docker/containers:rw
+    environment:
+      SDC_JAVA_OPTS: "-Xmx512m -Xms512m "
+      NO_PROXY: "elasticsearch, kafka, kafka-connect-ui"
+      no_proxy: "elasticsearch, kafka, kafka-connect-ui"
+
+  streamsets:
+    image: ${registry}/streamsets:${solutionName}_${solutionVersion}_dev
+    hostname: streamsets
+    container_name: streamsets
+    ports:
+      - '18630:18630'
+    volumes:
+      - /var/lib/docker/containers:/hostfs/var/lib/docker/containers:rw
+    environment:
+      SDC_JAVA_OPTS: "-Xmx512m -Xms512m "
+      NO_PROXY: "elasticsearch, kafka, kafka-connect-ui"
+      no_proxy: "elasticsearch, kafka, kafka-connect-ui"
+
+#   elasticsearch:
+#    image: ${registry}/elasticsearch:${solutionName}_${solutionVersion}
+#    hostname: elasticsearch
+#    container_name: elasticsearch
 #    environment:
-#      NO_PROXY: "elasticsearch, kafka, kafka-connect-ui"
-#      no_proxy: "elasticsearch, kafka, kafka-connect-ui"
-
-#  streamsets:
-#    image: ${registry}/streamsets:dev
-#    hostname: streamsets
-#    container_name: streamsets
+#      - clustername=infometis-local
+#      - bootstrap.memory_lock=true
+#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
 #    ports:
-#      - '18630:18630'
-#    volumes:
-#      - /var/lib/docker/containers:/hostfs/var/lib/docker/containers:rw
+#      - 9200:9200
+#      - 9300:9300
+
+#  kibana:
+#    image: ${registry}/kibana:${solutionName}_${solutionVersion}
+#    hostname: kibana
+#    container_name: kibana
 #    environment:
-#      SDC_JAVA_OPTS: "-Xmx512m -Xms512m "
-#      NO_PROXY: "elasticsearch, kafka, kafka-connect-ui"
-#      no_proxy: "elasticsearch, kafka, kafka-connect-ui"
+#      ELASTICSEARCH_URL: http://elasticsearch:9200
+#    ports:
+#      - 5601:5601
 
- # elasticsearch:
- #   image: ${registry}/elasticsearch:base
- #   hostname: elasticsearch
- #   container_name: elasticsearch
- #   environment:
- #     - clustername=elastic-kafka
- #     - bootstrap.memory_lock=true
- #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
- #   ulimits:
- #     memlock:
- #       soft: -1
- #       hard: -1
- #   ports:
- #     - 9200:9200
- #     - 9300:9300
-
- # kibana:
- #   image: ${registry}/kibana:local
- #   hostname: kibana
- #   container_name: kibana
- #   environment:
- #     ELASTICSEARCH_URL: http://elasticsearch:9200
- #   ports:
- #     - 5601:5601
-
- # grafana:
- #   image: ${registry}/grafana:local
- #   hostname: grafana
- #   container_name: grafana
- #   environment:
- #     GF_LOG_FORMAT: json
- #     GF_LOG_FILE_FORMAT: json
- #     GF_LOG_CONSOLE_FORMAT: json
- #     GF_LOG_SYSLOG_FORMAT: json
- #     GF_LOG_LEVEL: warn
- #   ports:
- #     - 3000:3000
+  grafana:
+    image: ${registry}/grafana:${solutionName}_${solutionVersion}
+    hostname: grafana
+    container_name: grafana
+    environment:
+      GF_LOG_FORMAT: json
+      GF_LOG_FILE_FORMAT: json
+      GF_LOG_CONSOLE_FORMAT: json
+      GF_LOG_SYSLOG_FORMAT: json
+      GF_LOG_LEVEL: warn
+    ports:
+      - 3000:3000

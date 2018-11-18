@@ -16,6 +16,25 @@ steps:
 - script: docker login -u $(registry) -p $(destinationRegistryPwd) 
   displayName: 'docker login'
 
+# Build image elasticsearch:$(imageName)_$(imageTag)
+- script: |
+    cd elasticsearch_$(imageName)
+    buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
+    buildDate="${buildDate:0:23}${buildDate:29:6}"
+    docker build -t $(destinationRegistry)/kafka:$(imageName)_$(imageTag) . \
+      --build-arg REGISTRY=$(destinationRegistry) \
+      --label "$(labelNamespace).schema-version=1.0" \
+      --label "$(labelNamespace).build-date=$buildDate" \
+      --label "$(labelNamespace).name=$(imageLabel) Elasticsearch" \
+      --label "$(labelNamespace).description=This image contains Elasticsearch for $(imageLabel)" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/elasticsearch:$(imageName)_$(imageTag) --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/elasticsearch:$(imageName)_$(imageTag)" \
+      --label "$(labelNamespace).image.type=component" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+    docker push $(registry)/elasticsearch:$(imageName)_$(imageTag)
+  displayName: 'Build & Push elasticsearch:$(imageName)_$(imageTag) image'
+
 # Build image - filebeat:$(imageName)_$(imageTag)
 - script: |
     cd filebeat_$(imageName)_docker
