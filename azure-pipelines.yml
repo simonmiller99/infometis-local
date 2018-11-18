@@ -239,6 +239,6 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/$(imageName):$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/$(imageName):$(imageTag)" \
       --label "$(labelNamespace).image.type=solution" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" 
     docker push $(registry)/$(imageName):$(imageTag)
   displayName: 'Build & Push $(imageName):$(imageTag) image'
