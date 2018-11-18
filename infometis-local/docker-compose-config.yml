@@ -53,6 +53,7 @@ services:
       - '18631:18630'
     volumes:
       - /var/lib/docker/containers:/hostfs/var/lib/docker/containers:rw
+    command: --base dc
     environment:
       SDC_JAVA_OPTS: "-Xmx512m -Xms512m "
       NO_PROXY: "elasticsearch, kafka, kafka-connect-ui"
@@ -66,35 +67,36 @@ services:
       - '18630:18630'
     volumes:
       - /var/lib/docker/containers:/hostfs/var/lib/docker/containers:rw
+    command: --base dc
     environment:
       SDC_JAVA_OPTS: "-Xmx512m -Xms512m "
       NO_PROXY: "elasticsearch, kafka, kafka-connect-ui"
       no_proxy: "elasticsearch, kafka, kafka-connect-ui"
 
-#   elasticsearch:
-#    image: ${registry}/elasticsearch:${solutionName}_${solutionVersion}
-#    hostname: elasticsearch
-#    container_name: elasticsearch
-#    environment:
-#      - clustername=infometis-local
-#      - bootstrap.memory_lock=true
-#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    ports:
-#      - 9200:9200
-#      - 9300:9300
+  elasticsearch:
+    image: ${registry}/elasticsearch:${solutionName}_${solutionVersion}
+    hostname: elasticsearch
+    container_name: elasticsearch
+    environment:
+      - clustername=infometis-local
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+      - 9300:9300
 
-#  kibana:
-#    image: ${registry}/kibana:${solutionName}_${solutionVersion}
-#    hostname: kibana
-#    container_name: kibana
-#    environment:
-#      ELASTICSEARCH_URL: http://elasticsearch:9200
-#    ports:
-#      - 5601:5601
+  kibana:
+    image: ${registry}/kibana:${solutionName}_${solutionVersion}
+    hostname: kibana
+    container_name: kibana
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - 5601:5601
 
   grafana:
     image: ${registry}/grafana:${solutionName}_${solutionVersion}

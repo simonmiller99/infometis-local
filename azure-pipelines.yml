@@ -168,7 +168,6 @@ steps:
     docker push $(registry)/metricbeat:$(imageName)_$(imageTag)
   displayName: 'Build & Push metricbeat:$(imageName)_$(imageTag) image'
 
-
 # Build image - streamsets:$(imageName)_$(imageTag)_dev
 - script: |
     cd streamsets_$(imageName)_dev
@@ -188,7 +187,6 @@ steps:
     docker push $(registry)/streamsets:$(imageName)_$(imageTag)_dev
   displayName: 'Build & Push streamsets:$(imageName)_$(imageTag)_dev image'
 
-# Build image - streamsets local 
 # Build image - streamsets:$(imageName)_$(imageTag)
 - script: |
     cd streamsets_$(imageName)
