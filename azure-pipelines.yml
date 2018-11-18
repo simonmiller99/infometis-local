@@ -18,7 +18,7 @@ steps:
 
 # Build image - filebeat:$(imageName)_$(imageTag)
 - script: |
-    cd filebeat_infometis-local_docker
+    cd filebeat_$(imageName)_docker
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/filebeat:$(imageName)_$(imageTag)_docker . \
@@ -37,7 +37,7 @@ steps:
 
 # Build image - grafana:$(imageName)_$(imageTag)
 - script: |
-    cd grafana_infometis-local
+    cd grafana_$(imageName)
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/grafana:$(imageName)_$(imageTag) . \
@@ -56,7 +56,7 @@ steps:
 
 # Build image - kafka:$(imageName)_$(imageTag)
 - script: |
-    cd kafka_infometis-local
+    cd kafka_$(imageName)
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/kafka:$(imageName)_$(imageTag) . \
@@ -75,7 +75,7 @@ steps:
 
 # Build image - kafka-manager:$(imageName)_$(imageTag)
 - script: |
-    cd kafka_infometis-local
+    cd kafka_$(imageName)
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/kafka-manager:$(imageName)_$(imageTag) . \
@@ -94,7 +94,7 @@ steps:
 
 # Build image - kibana:$(imageName)_$(imageTag)
 - script: |
-    cd kafka_infometis-local
+    cd kafka_$(imageName)
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/kibana:$(imageName)_$(imageTag) . \
@@ -113,7 +113,7 @@ steps:
 
 # Build image - ksql-server:$(imageName)_$(imageTag)
 - script: |
-    cd ksql-server_infometis-local
+    cd ksql-server_$(imageName)
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/ksql-server:$(imageName)_$(imageTag) . \
@@ -130,28 +130,84 @@ steps:
     docker push $(registry)/ksql-server:$(imageName)_$(imageTag)
   displayName: 'Build & Push ksql-server:$(imageName)_$(imageTag) image'
 
-# Build image - metricbeat local 
-#- script: |
-#    cd metricbeat-local
-#    docker build -t $(registry)/metricbeat:local . --build-arg REGISTRY=$(registry)
-#    docker push $(registry)/metricbeat:local
-#  displayName: 'Build & Push metricbeat:local image'
+# Build image - metricbeat:$(imageName)_$(imageTag)
+- script: |
+    cd metricbeat_$(imageName)
+    buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
+    buildDate="${buildDate:0:23}${buildDate:29:6}"
+    docker build -t $(destinationRegistry)/metricbeat:$(imageName)_$(imageTag) . \
+      --build-arg REGISTRY=$(destinationRegistry) \
+      --label "$(labelNamespace).schema-version=1.0" \
+      --label "$(labelNamespace).build-date=$buildDate" \
+      --label "$(labelNamespace).name=$(imageLabel) - Metricbeat" \
+      --label "$(labelNamespace).description=This image contains Metricbeat for $(imageLabel)" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/metricbeat:$(imageName)_$(imageTag) --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/metricbeat:$(imageName)_$(imageTag)" \
+      --label "$(labelNamespace).image.type=component" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+    docker push $(registry)/metricbeat:$(imageName)_$(imageTag)
+  displayName: 'Build & Push metricbeat:$(imageName)_$(imageTag) image'
 
-# Build image - streamsets dev
-#- script: |
-#    cd streamsets-dev
-#    docker build -t $(registry)/streamsets:dev . --build-arg REGISTRY=$(registry)
-#    docker push $(registry)/streamsets:dev
-#  displayName: 'Build & Push streamsets:dev image'
+
+# Build image - streamsets:$(imageName)_$(imageTag)_dev
+- script: |
+    cd streamsets_$(imageName)_dev
+    buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
+    buildDate="${buildDate:0:23}${buildDate:29:6}"
+    docker build -t $(destinationRegistry)/streamsets:$(imageName)_$(imageTag)_dev . \
+      --build-arg REGISTRY=$(destinationRegistry) \
+      --label "$(labelNamespace).schema-version=1.0" \
+      --label "$(labelNamespace).build-date=$buildDate" \
+      --label "$(labelNamespace).name=$(imageLabel) - Streamsets Dev" \
+      --label "$(labelNamespace).description=This image contains Streamsets Dev for $(imageLabel)" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/streamsets:$(imageName)_$(imageTag)_dev --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/streamsets:$(imageName)_$(imageTag)_dev" \
+      --label "$(labelNamespace).image.type=component" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+    docker push $(registry)/streamsets:$(imageName)_$(imageTag)_dev
+  displayName: 'Build & Push streamsets:$(imageName)_$(imageTag)_dev image'
 
 # Build image - streamsets local 
-#- script: |
-#    cd streamsets-local
-#    docker build -t $(registry)/streamsets:local . --build-arg REGISTRY=$(registry)
-#    docker push $(registry)/streamsets:local
-#  displayName: 'Build & Push streamsets:local image'
+# Build image - streamsets:$(imageName)_$(imageTag)
+- script: |
+    cd streamsets_$(imageName)
+    buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
+    buildDate="${buildDate:0:23}${buildDate:29:6}"
+    docker build -t $(destinationRegistry)/streamsets:$(imageName)_$(imageTag) . \
+      --build-arg REGISTRY=$(destinationRegistry) \
+      --label "$(labelNamespace).schema-version=1.0" \
+      --label "$(labelNamespace).build-date=$buildDate" \
+      --label "$(labelNamespace).name=$(imageLabel) - Streamsets" \
+      --label "$(labelNamespace).description=This image contains Streamsets for $(imageLabel)" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/streamsets:$(imageName)_$(imageTag) --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/streamsets:$(imageName)_$(imageTag)" \
+      --label "$(labelNamespace).image.type=component" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+    docker push $(registry)/streamsets:$(imageName)_$(imageTag)
+  displayName: 'Build & Push streamsets:$(imageName)_$(imageTag) image'
 
 # zookeeper
+# Build image - zookeeper:$(imageName)_$(imageTag)
+- script: |
+    cd zookeeper_$(imageName)
+    buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
+    buildDate="${buildDate:0:23}${buildDate:29:6}"
+    docker build -t $(destinationRegistry)/zookeeper:$(imageName)_$(imageTag) . \
+      --build-arg REGISTRY=$(destinationRegistry) \
+      --label "$(labelNamespace).schema-version=1.0" \
+      --label "$(labelNamespace).build-date=$buildDate" \
+      --label "$(labelNamespace).name=$(imageLabel) - Zookeeper" \
+      --label "$(labelNamespace).description=This image contains Zookeeper for $(imageLabel)" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/zookeeper:$(imageName)_$(imageTag) --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/zookeeper:$(imageName)_$(imageTag)" \
+      --label "$(labelNamespace).image.type=component" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+    docker push $(registry)/zookeeper:$(imageName)_$(imageTag)
+  displayName: 'Build & Push zookeeper:$(imageName)_$(imageTag) image'
 
 # Build main container image - infometis-local
 #- script: |
