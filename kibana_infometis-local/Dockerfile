@@ -1,6 +1,8 @@
 ARG REGISTRY=invalid
 FROM $REGISTRY/kibana:base
 
+###########################################
+
 USER root
 
 RUN mkdir -p /container-wrapper/config

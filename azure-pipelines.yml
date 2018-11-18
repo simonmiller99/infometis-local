@@ -8,6 +8,7 @@ pool:
 
 variables:
   registry: 'vc11web'
+  imageLabel: 'InfoMetis Local V1'
   imageName: 'infometis-local'
   imageTag: 'v1'
 
@@ -15,7 +16,7 @@ steps:
 - script: docker login -u $(registry) -p $(destinationRegistryPwd) 
   displayName: 'docker login'
 
-# Build image - filebeat:infometis-local_docker
+# Build image - filebeat:$(imageName)_$(imageTag)
 - script: |
     cd filebeat_infometis-local_docker
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
@@ -24,8 +25,8 @@ steps:
       --build-arg REGISTRY=$(destinationRegistry) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
-      --label "$(labelNamespace).name=InfoMetis Local - Filebeat Docker" \
-      --label "$(labelNamespace).description=This image consumes the JSON log file of the docker instance for InfoMetis Local" \
+      --label "$(labelNamespace).name=$(imageLabel) - Filebeat Docker" \
+      --label "$(labelNamespace).description=This image consumes the JSON log file of the docker instance for $(imageLabel)" \
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/filebeat:$(imageName)_$(imageTag)_docker --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/filebeat:$(imageName)_$(imageTag)_docker" \
       --label "$(labelNamespace).image.type=component" \
@@ -34,7 +35,7 @@ steps:
     docker push $(registry)/filebeat:$(imageName)_$(imageTag)_docker
   displayName: 'Build & Push filebeat:$(imageName)_$(imageTag)_docker image'
 
-# Build image - grafana:infometis-local
+# Build image - grafana:$(imageName)_$(imageTag)
 - script: |
     cd grafana_infometis-local
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
@@ -43,17 +44,17 @@ steps:
       --build-arg REGISTRY=$(destinationRegistry) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
-      --label "$(labelNamespace).name=InfoMetis Local - Grafana" \
-      --label "$(labelNamespace).description=This image contains the metric dashboards for InfoMetis Local" \
+      --label "$(labelNamespace).name=$(imageLabel) - Grafana" \
+      --label "$(labelNamespace).description=This image contains the metric dashboards for $(imageLabel)" \
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/grafana:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/grafana:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
       --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/grafana:$(imageName)_$(imageTag)
-  displayName: 'Build & Push grafana:infometis_local image'
+  displayName: 'Build & Push grafana:$(imageName)_$(imageTag) image'
 
-# Build image - kafka:infometis-local
+# Build image - kafka:$(imageName)_$(imageTag)
 - script: |
     cd kafka_infometis-local
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
@@ -62,18 +63,17 @@ steps:
       --build-arg REGISTRY=$(destinationRegistry) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
-      --label "$(labelNamespace).name=InfoMetis Local - Kafka" \
-      --label "$(labelNamespace).description=This image contains Kafka for InfoMetis Local" \
+      --label "$(labelNamespace).name=$(imageLabel) - Kafka" \
+      --label "$(labelNamespace).description=This image contains Kafka for $(imageLabel)" \
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/kafka:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/kafka:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
       --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/kafka:$(imageName)_$(imageTag)
-  displayName: 'Build & Push kafka:infometis_local image'
+  displayName: 'Build & Push kafka:$(imageName)_$(imageTag) image'
 
-# kafka-manager
-# Build image - kafka-manager:infometis-local
+# Build image - kafka-manager:$(imageName)_$(imageTag)
 - script: |
     cd kafka_infometis-local
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
@@ -82,24 +82,53 @@ steps:
       --build-arg REGISTRY=$(destinationRegistry) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
-      --label "$(labelNamespace).name=InfoMetis Local - Kafka Manager" \
-      --label "$(labelNamespace).description=This image contains a simple Kafka Manager for InfoMetis Local" \
+      --label "$(labelNamespace).name=$(imageLabel) - Kafka Manager" \
+      --label "$(labelNamespace).description=This image contains a simple Kafka Manager for $(imageLabel)" \
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/kafka-manager:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/kafka-manager:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
       --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/kafka-manager:$(imageName)_$(imageTag)
-  displayName: 'Build & Push kafka-manager:infometis_local image'
+  displayName: 'Build & Push kafka-manager:$(imageName)_$(imageTag) image'
 
-# Build image - kibana local 
-#- script: |
-#    cd kibana-local
-#    docker build -t $(registry)/kibana:local . --build-arg REGISTRY=$(registry)
-#    docker push $(registry)/kibana:local
-#  displayName: 'Build & Push kibana:local image'
+# Build image - kibana:$(imageName)_$(imageTag)
+- script: |
+    cd kafka_infometis-local
+    buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
+    buildDate="${buildDate:0:23}${buildDate:29:6}"
+    docker build -t $(destinationRegistry)/kibana:$(imageName)_$(imageTag) . \
+      --build-arg REGISTRY=$(destinationRegistry) \
+      --label "$(labelNamespace).schema-version=1.0" \
+      --label "$(labelNamespace).build-date=$buildDate" \
+      --label "$(labelNamespace).name=$(imageLabel) - Kafka Manager" \
+      --label "$(labelNamespace).description=This image contains pre-installed ElasticSearch Kibana for $(imageLabel)" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/kibana:$(imageName)_$(imageTag) --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/kibana:$(imageName)_$(imageTag)" \
+      --label "$(labelNamespace).image.type=component" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+    docker push $(registry)/kibana:$(imageName)_$(imageTag)
+  displayName: 'Build & Push kibana:$(imageName)_$(imageTag) image'
 
-# ksql server
+# Build image - ksql-server:$(imageName)_$(imageTag)
+- script: |
+    cd ksql-server_infometis-local
+    buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
+    buildDate="${buildDate:0:23}${buildDate:29:6}"
+    docker build -t $(destinationRegistry)/ksql-server:$(imageName)_$(imageTag) . \
+      --build-arg REGISTRY=$(destinationRegistry) \
+      --label "$(labelNamespace).schema-version=1.0" \
+      --label "$(labelNamespace).build-date=$buildDate" \
+      --label "$(labelNamespace).name=$(imageLabel) - KSQL Server" \
+      --label "$(labelNamespace).description=This image contains KSQL Server for $(imageLabel)" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/ksql-server:$(imageName)_$(imageTag) --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/ksql-server:$(imageName)_$(imageTag)" \
+      --label "$(labelNamespace).image.type=component" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+    docker push $(registry)/ksql-server:$(imageName)_$(imageTag)
+  displayName: 'Build & Push ksql-server:$(imageName)_$(imageTag) image'
 
 # Build image - metricbeat local 
 #- script: |
