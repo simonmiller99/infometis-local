@@ -2,7 +2,7 @@
 version: '3'
 services:
   zookeeper:
-    image: vc11web/zookeeper:base
+    image: ${registry}/zookeeper:base
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -12,7 +12,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: vc11web/kafka:base
+    image: ${registry}/kafka:base
     hostname: kafka
     container_name: kafka
     ports:
@@ -37,7 +37,7 @@ services:
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
 
   kafka-manager:
-    image: vc11web/kafka-manager:base
+    image: ${registry}/kafka-manager:base
     hostname: kafka-manager
     container_name: kafka-manager
     ports:
@@ -48,7 +48,7 @@ services:
       KM_ARGS: -Djava.net.preferIPv4Stack=true
 
   streamsets-local:
-    image: vc11web/streamsets:local
+    image: ${registry}/streamsets:local
     hostname: streamsets-local
     container_name: streamsets-local
     ports:
@@ -60,7 +60,7 @@ services:
       no_proxy: "elasticsearch, kafka, kafka-connect-ui"
 
   streamsets:
-    image: vc11web/streamsets:dev
+    image: ${registry}/streamsets:dev
     hostname: streamsets
     container_name: streamsets
     ports:
@@ -73,7 +73,7 @@ services:
       no_proxy: "elasticsearch, kafka, kafka-connect-ui"
 
   elasticsearch:
-    image: vc11web/elasticsearch:base
+    image: ${registry}/elasticsearch:base
     hostname: elasticsearch
     container_name: elasticsearch
     environment:
@@ -89,7 +89,7 @@ services:
       - 9300:9300
 
   kibana:
-    image: vc11web/kibana:local
+    image: ${registry}/kibana:local
     hostname: kibana
     container_name: kibana
     environment:
@@ -98,7 +98,7 @@ services:
       - 5601:5601
 
   grafana:
-    image: vc11web/grafana:local
+    image: ${registry}/grafana:local
     hostname: grafana
     container_name: grafana
     environment:

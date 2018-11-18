@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1541945765341,
+  "iteration": 1542208801350,
   "links": [],
   "panels": [
     {
@@ -562,7 +562,7 @@
           "alias": "Total",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -578,7 +578,7 @@
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "WHERE beat_name=$Node",
@@ -589,7 +589,7 @@
           "alias": "Used",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -605,7 +605,7 @@
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "WHERE beat_name=$Node",
@@ -616,7 +616,7 @@
           "alias": "Actual Used",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -632,7 +632,7 @@
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "WHERE beat_name=$Node",
@@ -643,7 +643,7 @@
           "alias": "Free",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -659,7 +659,7 @@
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "WHERE beat_name=$Node",
@@ -670,7 +670,7 @@
           "alias": "Actual Free",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -686,7 +686,7 @@
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "WHERE beat_name=$Node",
@@ -694,6 +694,7 @@
           "timeField": "@timestamp"
         }
       ],
+      "timeFrom": "2m",
       "title": "Current RAM Stats",
       "transform": "timeseries_to_columns",
       "type": "table"
@@ -760,7 +761,7 @@
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "WHERE beat_name=$Node",
@@ -787,7 +788,7 @@
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "WHERE beat_name=$Node",
@@ -814,7 +815,7 @@
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "WHERE beat_name=$Node",
@@ -822,6 +823,7 @@
           "timeField": "@timestamp"
         }
       ],
+      "timeFrom": "2m",
       "title": "Current Swap Stats",
       "transform": "timeseries_to_columns",
       "type": "table"

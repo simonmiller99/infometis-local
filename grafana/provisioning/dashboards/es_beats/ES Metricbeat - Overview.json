@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1541946438466,
+  "iteration": 1542209025725,
   "links": [],
   "panels": [
     {
@@ -71,7 +71,7 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "Max",
+          "pattern": "Average",
           "thresholds": [
             "250",
             " 1000"
@@ -138,7 +138,7 @@
                   "inline": "_value / (1024 * 1024)"
                 }
               },
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "beat_name:$Node",
@@ -146,6 +146,7 @@
           "timeField": "@timestamp"
         }
       ],
+      "timeFrom": "2m",
       "title": "Container Memory Usage",
       "transform": "table",
       "type": "table"
@@ -856,7 +857,7 @@
           "alias": "Document Count",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -883,7 +884,7 @@
           "alias": "Store Size (Mb)",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -947,7 +948,7 @@
           "alias": "JVM Collection Time Old (ms)",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -979,7 +980,7 @@
           "alias": "JVM Collection Count Old",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -1038,7 +1039,7 @@
           "alias": "JVM Collection Count Young",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -1062,8 +1063,8 @@
           "timeField": "@timestamp"
         }
       ],
-      "timeFrom": "1m",
-      "timeShift": "10s",
+      "timeFrom": "2m",
+      "timeShift": null,
       "title": "Elasticsearch",
       "transform": "timeseries_aggregations",
       "type": "table"
@@ -1281,7 +1282,7 @@
           "alias": "Outstanding Requests",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -1335,7 +1336,7 @@
           "alias": "Znode Count",
           "bucketAggs": [
             {
-              "field": "timestamp",
+              "field": "@timestamp",
               "id": "2",
               "settings": {
                 "interval": "auto",
@@ -1359,8 +1360,8 @@
           "timeField": "@timestamp"
         }
       ],
-      "timeFrom": "1m",
-      "timeShift": "10s",
+      "timeFrom": "2m",
+      "timeShift": null,
       "title": "Zookeeper",
       "transform": "timeseries_aggregations",
       "type": "table"

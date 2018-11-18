@@ -18,48 +18,68 @@ steps:
 # Build image - filebeat docker
 - script: |
     cd filebeat-docker
-    docker build -t $(registry)/filebeat:docker . --build-arg REGISTRY=$(registry)
-    docker push $(registry)/filebeat:docker
-  displayName: 'Build & Push filebeat:docker image'
+    buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
+    buildDate="${buildDate:0:23}${buildDate:29:6}"
+    docker build -t $(destinationRegistry)/filebeat:infometis-local_docker . \
+      --build-arg REGISTRY=$(destinationRegistry) \
+      --label "$(labelNamespace).schema-version=1.0" \
+      --label "$(labelNamespace).build-date=$buildDate" \
+      --label "$(labelNamespace).name=InfoMeis Local - Filebeat Docker" \
+      --label "$(labelNamespace).description=This image consumes the JSON log file of the docker instance for InfoMetis Local" \
+      --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/filebeat:infometis-local_docker --help" \
+      --label "$(labelNamespace).image.name=$(destinationRegistry)/filebeat:infometis-local_docker" \
+      --label "$(labelNamespace).image.type=component" \
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).image.base.name=$(destinationRegistry)/filebeat:base"
+    docker push $(registry)/filebeat:infometis-local_docker
+  displayName: 'Build & Push filebeat:infometis-local_docker image'
 
 # Build image - grafana local
-- script: |
-    cd grafana
-    docker build -t $(registry)/grafana:local . --build-arg REGISTRY=$(registry)
-    docker push $(registry)/grafana:local
-  displayName: 'Build & Push grafana:local image'
+#- script: |
+#    cd grafana
+#    docker build -t $(registry)/grafana:local . --build-arg REGISTRY=$(registry)
+#    docker push $(registry)/grafana:local
+#  displayName: 'Build & Push grafana:local image'
+
+# kafka
+
+# kafka-manager
 
 # Build image - kibana local 
-- script: |
-    cd kibana-local
-    docker build -t $(registry)/kibana:local . --build-arg REGISTRY=$(registry)
-    docker push $(registry)/kibana:local
-  displayName: 'Build & Push kibana:local image'
+#- script: |
+#    cd kibana-local
+#    docker build -t $(registry)/kibana:local . --build-arg REGISTRY=$(registry)
+#    docker push $(registry)/kibana:local
+#  displayName: 'Build & Push kibana:local image'
+
+# ksql server
 
 # Build image - metricbeat local 
-- script: |
-    cd metricbeat-local
-    docker build -t $(registry)/metricbeat:local . --build-arg REGISTRY=$(registry)
-    docker push $(registry)/metricbeat:local
-  displayName: 'Build & Push metricbeat:local image'
+#- script: |
+#    cd metricbeat-local
+#    docker build -t $(registry)/metricbeat:local . --build-arg REGISTRY=$(registry)
+#    docker push $(registry)/metricbeat:local
+#  displayName: 'Build & Push metricbeat:local image'
 
 # Build image - streamsets dev
-- script: |
-    cd streamsets-dev
-    docker build -t $(registry)/streamsets:dev . --build-arg REGISTRY=$(registry)
-    docker push $(registry)/streamsets:dev
-  displayName: 'Build & Push streamsets:dev image'
+#- script: |
+#    cd streamsets-dev
+#    docker build -t $(registry)/streamsets:dev . --build-arg REGISTRY=$(registry)
+#    docker push $(registry)/streamsets:dev
+#  displayName: 'Build & Push streamsets:dev image'
 
 # Build image - streamsets local 
-- script: |
-    cd streamsets-local
-    docker build -t $(registry)/streamsets:local . --build-arg REGISTRY=$(registry)
-    docker push $(registry)/streamsets:local
-  displayName: 'Build & Push streamsets:local image'
+#- script: |
+#    cd streamsets-local
+#    docker build -t $(registry)/streamsets:local . --build-arg REGISTRY=$(registry)
+#    docker push $(registry)/streamsets:local
+#  displayName: 'Build & Push streamsets:local image'
+
+# zookeeper
 
 # Build main container image - infometis-local
-- script: |
-    cd $(imageName)
-    docker build -t $(registry)/$(imageName):$(imageTag) .
-    docker push $(registry)/$(imageName):$(imageTag)
-  displayName: 'Build & Push main image'
+#- script: |
+#    cd $(imageName)
+#    docker build -t $(registry)/$(imageName):$(imageTag) . --build-arg REGISTRY=$(registry)
+#    docker push $(registry)/$(imageName):$(imageTag)
+#  displayName: 'Build & Push main image'

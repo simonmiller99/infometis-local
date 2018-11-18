@@ -27,47 +27,46 @@ docker commit -t hvbnext/streamsets:mychanges <container id>
 docker push hvbnext/streamsets:mychanges
 
 # Remove existing container and images
-docker image rm --force vc11web/infometis-local:v1
-docker image rm --force vc11web/zookeeper:base
-docker image rm --force vc11web/kafka:base
-docker image rm --force vc11web/kafka-manager:base
-docker image rm --force vc11web/filebeat:docker
-docker image rm --force vc11web/metricbeat:local
-docker image rm --force vc11web/streamsets:local
-docker image rm --force vc11web/streamsets:dev
-docker image rm --force vc11web/elasticsearch:base
-docker image rm --force vc11web/kibana:local
-docker image rm --force vc11web/grafana:local
+docker image rm --force hvbnext/infometis-local:v1
+docker image rm --force hvbnext/zookeeper:base
+docker image rm --force hvbnext/kafka:base
+docker image rm --force hvbnext/kafka-manager:base
+docker image rm --force hvbnext/filebeat:docker
+docker image rm --force hvbnext/metricbeat:local
+docker image rm --force hvbnext/streamsets:local
+docker image rm --force hvbnext/streamsets:dev
+docker image rm --force hvbnext/elasticsearch:base
+docker image rm --force hvbnext/kibana:local
+docker image rm --force hvbnext/grafana:local
 
+##################### CONFIGURATION #####################################
 
 docker-compose -f docker-compose-config.yml up -d
 
-docker commit elasticsearch vc11web/elasticsearch:local
-docker commit streamsets vc11web/streamsets:dev
-docker commit streamsets-local vc11web/streamsets:local
+#####
+
+# import pipelines in streamsets and streamsets-local
+# import saved objects in kibana
+# register kafka in kafka-manager
+
+#####
+
+docker commit elasticsearch hvbnext/elasticsearch:local-cc
+docker commit kafka-manager hvbnext/kafka-manager:local-cc
+docker commit streamsets hvbnext/streamsets:dev-cc
+docker commit streamsets-local hvbnext/streamsets:local-cc
+
+docker-compose -f docker-compose-config.yml down
+
+#####
 
 docker-compose up -d
 
-docker tag vc11web/infometis-local:v1 hvbnext/infometis-local:v1
-docker tag vc11web/zookeeper:base hvbnext/zookeeper:base
-docker tag vc11web/kafka:base hvbnext/kafka:base
-docker tag vc11web/kafka-manager:base hvbnext/kafka-manager:base
-docker tag vc11web/filebeat:docker hvbnext/filebeat:docker
-docker tag vc11web/metricbeat:local hvbnext/metricbeat:local
-docker tag vc11web/elasticsearch:local hvbnext/elasticsearch:local
-docker tag vc11web/streamsets:dev hvbnext/streamsets:dev
-docker tag vc11web/streamsets:local hvbnext/streamsets:local
-docker tag vc11web/kibana:local hvbnext/kibana:local
-docker tag vc11web/grafana:local hvbnext/grafana:local
+#####
 
-docker push hvbnext/infometis-local:v1
-docker push hvbnext/zookeeper:base
-docker push hvbnext/kafka:base
-docker push hvbnext/kafka-manager:base
-docker push hvbnext/filebeat:docker
-docker push hvbnext/metricbeat:local
-docker push hvbnext/elasticsearch:local
-docker push hvbnext/streamsets:dev
-docker push hvbnext/streamsets:local
-docker push hvbnext/kibana:local
-docker push hvbnext/grafana:local
+docker push hvbnext/kafka-manager:local-cc
+docker push hvbnext/elasticsearch:local-cc
+docker push hvbnext/streamsets:dev-cc
+docker push hvbnext/streamsets:local-cc
+
+##################### CONFIGURATION #####################################

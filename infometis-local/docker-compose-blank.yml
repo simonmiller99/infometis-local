@@ -2,7 +2,7 @@
 version: '3'
 services:
   zookeeper:
-    image: hvbnext/zookeeper:base
+    image: ${registry}/zookeeper:base
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -12,7 +12,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: hvbnext/kafka:base
+    image: ${registry}/kafka:base
     hostname: kafka
     container_name: kafka
     ports:
@@ -37,7 +37,7 @@ services:
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
 
   kafka-manager:
-    image: hvbnext/kafka-manager:base
+    image: ${registry}/kafka-manager:base
     hostname: kafka-manager
     container_name: kafka-manager
     ports:
@@ -48,7 +48,7 @@ services:
       KM_ARGS: -Djava.net.preferIPv4Stack=true
 
   filebeat-docker:
-    image: hvbnext/filebeat:docker
+    image: ${registry}/filebeat:docker
     hostname: filebeat-docker
     container_name: filebeat-docker
     command: filebeat -e -strict.perms=false
@@ -59,7 +59,7 @@ services:
       no_proxy: "elasticsearch, kafka"
 
   metricbeat-local:
-    image: hvbnext/metricbeat:local
+    image: ${registry}/metricbeat:local
     hostname: metricbeat-local
     container_name: metricbeat-local
     command: metricbeat -e -strict.perms=false
@@ -70,7 +70,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   streamsets-local:
-    image: hvbnext/streamsets:local
+    image: ${registry}/streamsets:local
     hostname: streamsets-local
     container_name: streamsets-local
     ports:
@@ -83,7 +83,7 @@ services:
       no_proxy: "elasticsearch, kafka, kafka-connect-ui"
 
   streamsets:
-    image: hvbnext/streamsets:dev
+    image: ${registry}/streamsets:dev
     hostname: streamsets
     container_name: streamsets
     ports:
@@ -96,7 +96,7 @@ services:
       no_proxy: "elasticsearch, kafka, kafka-connect-ui"
 
   elasticsearch:
-    image: hvbnext/elasticsearch:base
+    image: ${registry}/elasticsearch:base
     hostname: elasticsearch
     container_name: elasticsearch
     environment:
@@ -112,7 +112,7 @@ services:
       - 9300:9300
 
   kibana:
-    image: hvbnext/kibana:local
+    image: ${registry}/kibana:local
     hostname: kibana
     container_name: kibana
     environment:
@@ -121,7 +121,7 @@ services:
       - 5601:5601
 
   grafana:
-    image: hvbnext/grafana:local
+    image: ${registry}/grafana:local
     hostname: grafana
     container_name: grafana
     environment:

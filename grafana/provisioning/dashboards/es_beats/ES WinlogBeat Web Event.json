@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1541945452697,
+  "iteration": 1542208207451,
   "links": [],
   "panels": [
     {
@@ -718,7 +718,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "in-filebeat-ab7-processed",
+        "datasource": "es_winlogbeat_webevent",
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -742,7 +742,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "in-filebeat-ab7-processed",
+        "datasource": "es_winlogbeat_webevent",
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -763,7 +763,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {

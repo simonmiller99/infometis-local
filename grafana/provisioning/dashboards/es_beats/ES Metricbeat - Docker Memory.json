@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1541943939784,
+  "iteration": 1542208684099,
   "links": [],
   "panels": [
     {
@@ -101,7 +101,7 @@
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "beat_name=$Node",
@@ -109,6 +109,7 @@
           "timeField": "@timestamp"
         }
       ],
+      "timeFrom": "2m",
       "title": "Total Memory Limit",
       "transform": "timeseries_aggregations",
       "type": "table"
@@ -306,7 +307,7 @@
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "beat_name=$Node",
@@ -314,6 +315,7 @@
           "timeField": "@timestamp"
         }
       ],
+      "timeFrom": "2m",
       "title": "Max Memory Usage",
       "transform": "timeseries_aggregations",
       "type": "table"
@@ -416,7 +418,7 @@
               "id": "1",
               "meta": {},
               "settings": {},
-              "type": "max"
+              "type": "avg"
             }
           ],
           "query": "beat_name=$Node",
@@ -424,6 +426,7 @@
           "timeField": "@timestamp"
         }
       ],
+      "timeFrom": "2m",
       "title": "Resident Set Size",
       "transform": "timeseries_aggregations",
       "type": "table"
