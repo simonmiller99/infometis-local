@@ -15,9 +15,9 @@ steps:
 - script: docker login -u $(registry) -p $(dockerpwd) 
   displayName: 'docker login'
 
-# Build image - filebeat docker
+# Build image - filebeat infometis-local_docker
 - script: |
-    cd filebeat-docker
+    cd filebeat_infometis-local_docker
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/filebeat:infometis-local_docker . \
