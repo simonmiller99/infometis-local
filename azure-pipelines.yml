@@ -229,7 +229,7 @@ steps:
 
 # Build image - $(imageName):$(imageTag)
 - script: |
-    cd $(imageName)_$(imageTag)
+    cd $(imageName)
     buildDate="$( date --rfc-3339=ns | sed 's/ /T/; s/\(\....\).*-/\1-/g' )"
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/$(imageName):$(imageTag) . \
