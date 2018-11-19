@@ -2,7 +2,7 @@
 version: '3'
 services:
   zookeeper:
-    image: ${registry}/zookeeper:base
+    image: ${registry}/zookeeper:${solutionName}_${solutionVersion}
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -12,7 +12,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: ${registry}/kafka:base
+    image: ${registry}/kafka:${solutionName}_${solutionVersion}
     hostname: kafka
     container_name: kafka
     ports:
@@ -31,13 +31,11 @@ services:
       KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka:29092
-      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:32181
-      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
       CONFLUENT_METRICS_ENABLE: 'true'
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
 
   kafka-manager:
-    image: ${registry}/kafka-manager:local-cc
+    image: ${registry}/kafka-manager:${solutionName}_${solutionVersion}
     hostname: kafka-manager
     container_name: kafka-manager
     ports:
@@ -48,7 +46,7 @@ services:
       KM_ARGS: -Djava.net.preferIPv4Stack=true
 
   filebeat-docker:
-    image: ${registry}/filebeat:docker
+    image: ${registry}/filebeat:${solutionName}_${solutionVersion}_docker
     hostname: filebeat-docker
     container_name: filebeat-docker
     command: filebeat -e -strict.perms=false
@@ -59,7 +57,7 @@ services:
       no_proxy: "elasticsearch, kafka"
 
   metricbeat-local:
-    image: ${registry}/metricbeat:local
+    image: ${registry}/metricbeat:${solutionName}_${solutionVersion}
     hostname: metricbeat-local
     container_name: metricbeat-local
     command: metricbeat -e -strict.perms=false
@@ -70,36 +68,39 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   streamsets-local:
-    image: ${registry}/streamsets:local-cc
+    image: ${registry}/streamsets:${solutionName}_${solutionVersion}_cc
     hostname: streamsets-local
     container_name: streamsets-local
     ports:
       - '18631:18630'
     volumes:
       - /var/lib/docker/containers:/hostfs/var/lib/docker/containers:rw
+    command: --base dc
     environment:
+      SDC_JAVA_OPTS: "-Xmx512m -Xms512m "
       NO_PROXY: "elasticsearch, kafka, kafka-connect-ui"
       no_proxy: "elasticsearch, kafka, kafka-connect-ui"
 
   streamsets:
-    image: ${registry}/streamsets:dev-cc
+    image: ${registry}/streamsets:${solutionName}_${solutionVersion}_dev_cc
     hostname: streamsets
     container_name: streamsets
     ports:
       - '18630:18630'
     volumes:
       - /var/lib/docker/containers:/hostfs/var/lib/docker/containers:rw
+    command: --base dc
     environment:
       SDC_JAVA_OPTS: "-Xmx512m -Xms512m "
       NO_PROXY: "elasticsearch, kafka, kafka-connect-ui"
       no_proxy: "elasticsearch, kafka, kafka-connect-ui"
 
   elasticsearch:
-    image: ${registry}/elasticsearch:local-cc
+    image: ${registry}/elasticsearch:${solutionName}_${solutionVersion}_cc
     hostname: elasticsearch
     container_name: elasticsearch
     environment:
-      - clustername=elastic-kafka
+      - clustername=infometis-local
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
@@ -111,7 +112,7 @@ services:
       - 9300:9300
 
   kibana:
-    image: ${registry}/kibana:local
+    image: ${registry}/kibana:${solutionName}_${solutionVersion}
     hostname: kibana
     container_name: kibana
     environment:
@@ -120,7 +121,7 @@ services:
       - 5601:5601
 
   grafana:
-    image: ${registry}/grafana:local
+    image: ${registry}/grafana:${solutionName}_${solutionVersion}
     hostname: grafana
     container_name: grafana
     environment:
