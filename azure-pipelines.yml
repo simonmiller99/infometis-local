@@ -31,7 +31,7 @@ steps:
       --label "$(labelNamespace).image.name=$(destinationRegistry)/elasticsearch:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/elasticsearch:$(imageName)_$(imageTag)
   displayName: 'Build & Push elasticsearch:$(imageName)_$(imageTag) image'
 
@@ -50,7 +50,7 @@ steps:
       --label "$(labelNamespace).image.name=$(destinationRegistry)/filebeat:$(imageName)_$(imageTag)_docker" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/filebeat:$(imageName)_$(imageTag)_docker
   displayName: 'Build & Push filebeat:$(imageName)_$(imageTag)_docker image'
 
@@ -69,7 +69,7 @@ steps:
       --label "$(labelNamespace).image.name=$(destinationRegistry)/grafana:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/grafana:$(imageName)_$(imageTag)
   displayName: 'Build & Push grafana:$(imageName)_$(imageTag) image'
 
@@ -88,7 +88,7 @@ steps:
       --label "$(labelNamespace).image.name=$(destinationRegistry)/kafka:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/kafka:$(imageName)_$(imageTag)
   displayName: 'Build & Push kafka:$(imageName)_$(imageTag) image'
 
@@ -107,7 +107,7 @@ steps:
       --label "$(labelNamespace).image.name=$(destinationRegistry)/kafka-manager:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/kafka-manager:$(imageName)_$(imageTag)
   displayName: 'Build & Push kafka-manager:$(imageName)_$(imageTag) image'
 
@@ -126,7 +126,7 @@ steps:
       --label "$(labelNamespace).image.name=$(destinationRegistry)/kibana:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/kibana:$(imageName)_$(imageTag)
   displayName: 'Build & Push kibana:$(imageName)_$(imageTag) image'
 
@@ -145,7 +145,7 @@ steps:
       --label "$(labelNamespace).image.name=$(destinationRegistry)/ksql-server:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/ksql-server:$(imageName)_$(imageTag)
   displayName: 'Build & Push ksql-server:$(imageName)_$(imageTag) image'
 
@@ -164,7 +164,7 @@ steps:
       --label "$(labelNamespace).image.name=$(destinationRegistry)/metricbeat:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/metricbeat:$(imageName)_$(imageTag)
   displayName: 'Build & Push metricbeat:$(imageName)_$(imageTag) image'
 
@@ -183,7 +183,7 @@ steps:
       --label "$(labelNamespace).image.name=$(destinationRegistry)/streamsets:$(imageName)_$(imageTag)_dev" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/streamsets:$(imageName)_$(imageTag)_dev
   displayName: 'Build & Push streamsets:$(imageName)_$(imageTag)_dev image'
 
@@ -202,7 +202,7 @@ steps:
       --label "$(labelNamespace).image.name=$(destinationRegistry)/streamsets:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/streamsets:$(imageName)_$(imageTag)
   displayName: 'Build & Push streamsets:$(imageName)_$(imageTag) image'
 
@@ -219,9 +219,9 @@ steps:
       --label "$(labelNamespace).description=This image contains Zookeeper for $(imageLabel)" \
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/zookeeper:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/zookeeper:$(imageName)_$(imageTag)" \
-      --label "$(labelNamespace).image.type=component" \
+      --label "$(labelNamespace).image.type=application" \
       --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).image.parent=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/zookeeper:$(imageName)_$(imageTag)
   displayName: 'Build & Push zookeeper:$(imageName)_$(imageTag) image'
 
@@ -239,6 +239,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/$(imageName):$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/$(imageName):$(imageTag)" \
       --label "$(labelNamespace).image.type=solution" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" 
+      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
+      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/$(imageName):$(imageTag)
   displayName: 'Build & Push $(imageName):$(imageTag) image'
