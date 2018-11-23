@@ -54,7 +54,7 @@ docker commit kafka-manager vc11web/kafka-manager:infometis-local_v1
 docker commit streamsets vc11web/streamsets:infometis-local_v1_dev
 docker commit streamsets-local vc11web/streamsets:infometis-local_v1
 
-docker-compose up -d
+docker-compose -f docker-compose-config.yml down
 
 docker tag vc11web/elasticsearch:infometis-local_v1 vc11web/elasticsearch:infometis-local_v1_cc
 docker tag vc11web/grafana:infometis-local_v1 vc11web/grafana:infometis-local_v1_cc
@@ -67,6 +67,8 @@ docker push vc11web/grafana:infometis-local_v1_cc
 docker push vc11web/kafka-manager:infometis-local_v1_cc
 docker push vc11web/streamsets:infometis-local_v1_dev_cc
 docker push vc11web/streamsets:infometis-local_v1_cc
+
+docker-compose up -d
 
 # remove images
 

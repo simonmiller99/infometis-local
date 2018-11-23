@@ -245,7 +245,7 @@ steps:
     docker build -t $(destinationRegistry)/$(imageName):$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
       --build-arg IMAGE=$(imageName) \
-      --build-arg TAG=$(imageName)_$(imageTag) \
+      --build-arg TAG=$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel)" \
