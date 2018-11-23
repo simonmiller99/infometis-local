@@ -45,7 +45,7 @@ steps:
     docker build -t $(destinationRegistry)/filebeat:$(imageName)_$(imageTag)_docker . \
       --build-arg REGISTRY=$(destinationRegistry) \
       --build-arg IMAGE=filebeat \
-      --build-arg TAG=$(imageName)_$(imageTag) \
+      --build-arg TAG=$(imageName)_$(imageTag)_docker \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) - Filebeat Docker" \
