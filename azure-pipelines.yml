@@ -11,6 +11,7 @@ variables:
   imageLabel: 'InfoMetis Local V1'
   imageName: 'infometis-local'
   imageTag: 'v1'
+  wrapperTag: 'v1'
 
 steps:
 - script: docker login -u $(registry) -p $(destinationRegistryPwd) 
@@ -23,6 +24,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/elasticsearch:$(imageName)_$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=elasticsearch \
+      --build-arg TAG=$(imageName)_$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) Elasticsearch" \
@@ -30,8 +33,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/elasticsearch:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/elasticsearch:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/elasticsearch:$(imageName)_$(imageTag)
   displayName: 'Build & Push elasticsearch:$(imageName)_$(imageTag) image'
 
@@ -42,6 +44,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/filebeat:$(imageName)_$(imageTag)_docker . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=filebeat \
+      --build-arg TAG=$(imageName)_$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) - Filebeat Docker" \
@@ -49,8 +53,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/filebeat:$(imageName)_$(imageTag)_docker --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/filebeat:$(imageName)_$(imageTag)_docker" \
       --label "$(labelNamespace).image.type=component" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/filebeat:$(imageName)_$(imageTag)_docker
   displayName: 'Build & Push filebeat:$(imageName)_$(imageTag)_docker image'
 
@@ -61,6 +64,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/grafana:$(imageName)_$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=grafana \
+      --build-arg TAG=$(imageName)_$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) - Grafana" \
@@ -68,8 +73,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/grafana:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/grafana:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/grafana:$(imageName)_$(imageTag)
   displayName: 'Build & Push grafana:$(imageName)_$(imageTag) image'
 
@@ -80,6 +84,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/kafka:$(imageName)_$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=kafka \
+      --build-arg TAG=$(imageName)_$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) - Kafka" \
@@ -87,8 +93,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/kafka:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/kafka:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/kafka:$(imageName)_$(imageTag)
   displayName: 'Build & Push kafka:$(imageName)_$(imageTag) image'
 
@@ -99,6 +104,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/kafka-manager:$(imageName)_$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=kafka-manager \
+      --build-arg TAG=$(imageName)_$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) - Kafka Manager" \
@@ -106,8 +113,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/kafka-manager:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/kafka-manager:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/kafka-manager:$(imageName)_$(imageTag)
   displayName: 'Build & Push kafka-manager:$(imageName)_$(imageTag) image'
 
@@ -118,6 +124,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/kibana:$(imageName)_$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=kibana \
+      --build-arg TAG=$(imageName)_$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) - Kibana" \
@@ -125,8 +133,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/kibana:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/kibana:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/kibana:$(imageName)_$(imageTag)
   displayName: 'Build & Push kibana:$(imageName)_$(imageTag) image'
 
@@ -137,6 +144,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/ksql-server:$(imageName)_$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=ksql-server \
+      --build-arg TAG=$(imageName)_$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) - KSQL Server" \
@@ -144,8 +153,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/ksql-server:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/ksql-server:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/ksql-server:$(imageName)_$(imageTag)
   displayName: 'Build & Push ksql-server:$(imageName)_$(imageTag) image'
 
@@ -156,6 +164,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/metricbeat:$(imageName)_$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=metricbeat \
+      --build-arg TAG=$(imageName)_$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) - Metricbeat" \
@@ -163,8 +173,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/metricbeat:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/metricbeat:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/metricbeat:$(imageName)_$(imageTag)
   displayName: 'Build & Push metricbeat:$(imageName)_$(imageTag) image'
 
@@ -175,6 +184,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/streamsets:$(imageName)_$(imageTag)_dev . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=streamsets \
+      --build-arg TAG=$(imageName)_$(imageTag)_dev \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) - Streamsets Dev" \
@@ -182,8 +193,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/streamsets:$(imageName)_$(imageTag)_dev --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/streamsets:$(imageName)_$(imageTag)_dev" \
       --label "$(labelNamespace).image.type=component" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/streamsets:$(imageName)_$(imageTag)_dev
   displayName: 'Build & Push streamsets:$(imageName)_$(imageTag)_dev image'
 
@@ -194,6 +204,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/streamsets:$(imageName)_$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=streamsets \
+      --build-arg TAG=$(imageName)_$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) - Streamsets" \
@@ -201,8 +213,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/streamsets:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/streamsets:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=component" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/streamsets:$(imageName)_$(imageTag)
   displayName: 'Build & Push streamsets:$(imageName)_$(imageTag) image'
 
@@ -213,6 +224,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/zookeeper:$(imageName)_$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=zookeeper \
+      --build-arg TAG=$(imageName)_$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel) - Zookeeper" \
@@ -220,8 +233,7 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/zookeeper:$(imageName)_$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/zookeeper:$(imageName)_$(imageTag)" \
       --label "$(labelNamespace).image.type=application" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/zookeeper:$(imageName)_$(imageTag)
   displayName: 'Build & Push zookeeper:$(imageName)_$(imageTag) image'
 
@@ -232,6 +244,8 @@ steps:
     buildDate="${buildDate:0:23}${buildDate:29:6}"
     docker build -t $(destinationRegistry)/$(imageName):$(imageTag) . \
       --build-arg REGISTRY=$(destinationRegistry) \
+      --build-arg IMAGE=$(imageName) \
+      --build-arg TAG=$(imageName)_$(imageTag) \
       --label "$(labelNamespace).schema-version=1.0" \
       --label "$(labelNamespace).build-date=$buildDate" \
       --label "$(labelNamespace).name=$(imageLabel)" \
@@ -239,7 +253,6 @@ steps:
       --label "$(labelNamespace).docker.cmd.help=docker run $(destinationRegistry)/$(imageName):$(imageTag) --help" \
       --label "$(labelNamespace).image.name=$(destinationRegistry)/$(imageName):$(imageTag)" \
       --label "$(labelNamespace).image.type=solution" \
-      --label "$(labelNamespace).image.wrapper=$(destinationRegistry)/container-wrapper:v1" \
-      --label "$(labelNamespace).solution.name=$(destinationRegistry)/$(imageName):$(imageTag)"
+      --label "$(labelNamespace).solution=$(destinationRegistry)/$(imageName):$(imageTag)"
     docker push $(registry)/$(imageName):$(imageTag)
   displayName: 'Build & Push $(imageName):$(imageTag) image'

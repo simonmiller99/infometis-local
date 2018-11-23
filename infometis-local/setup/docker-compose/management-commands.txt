@@ -68,6 +68,27 @@ docker push vc11web/kafka-manager:infometis-local_v1_cc
 docker push vc11web/streamsets:infometis-local_v1_dev_cc
 docker push vc11web/streamsets:infometis-local_v1_cc
 
+# remove images
+
+docker image rm --force vc11web/infometis-local:v1
+docker image rm --force vc11web/streamsets:infometis-local_v1
+docker image rm --force vc11web/streamsets:infometis-local_v1_cc
+docker image rm --force vc11web/streamsets:infometis-local_v1_dev
+docker image rm --force vc11web/streamsets:infometis-local_v1_dev_cc
+docker image rm --force vc11web/kafka-manager:infometis-local_v1
+docker image rm --force vc11web/kafka-manager:infometis-local_v1_cc
+docker image rm --force vc11web/grafana:infometis-local_v1
+docker image rm --force vc11web/grafana:infometis-local_v1_cc
+docker image rm --force vc11web/elasticsearch:infometis-local_v1
+docker image rm --force vc11web/elasticsearch:infometis-local_v1_cc
+docker image rm --force vc11web/kibana:infometis-local_v1
+docker image rm --force vc11web/kafka:infometis-local_v1
+docker image rm --force vc11web/zookeeper:infometis-local_v1
+docker image rm --force vc11web/metricbeat:infometis-local_v1
+docker image rm --force vc11web/ksql-server:infometis-local_v1
+docker image rm --force vc11web/filebeat:infometis-local_v1_docker
+
+
 # tag images under hvbnext account
 
 docker tag vc11web/infometis-local:v1 hvbnext/infometis-local:v1

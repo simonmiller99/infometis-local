@@ -1,7 +1,13 @@
 ARG REGISTRY=invalid
 FROM $REGISTRY/grafana:base
 
+ARG REGISTRY=registry
+ARG IMAGE=image
+ARG TAG=tag
+
 ###########################################
+
+ENV containerImage "$REGISTRY/$IMAGE:$TAG"
 
 COPY ./provisioning/datasources/POTF_KPN.yaml /etc/grafana/provisioning/datasources/POTF_KPN.yaml
 RUN mkdir -p /var/lib/grafana/dashboards && \

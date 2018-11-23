@@ -1,7 +1,13 @@
 ARG REGISTRY=invalid
 FROM $REGISTRY/kibana:base
 
+ARG REGISTRY=registry
+ARG IMAGE=image
+ARG TAG=tag
+
 ###########################################
+
+ENV containerImage "$REGISTRY/$IMAGE:$TAG"
 
 USER root
 
