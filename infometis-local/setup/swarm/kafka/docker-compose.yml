@@ -45,4 +45,4 @@ services:
 
 networks:
   infometis:
-    external:true
+    external: true

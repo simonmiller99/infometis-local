@@ -11,7 +11,7 @@ We are going to use docker-compose stack on the swarm.
 
 ## Commands
 
-1. docker network create -driver overlay infometis
+1. docker network create -d overlay infometis
 
 2. In kafka folder: docker stack deploy --compose-file docker-compose.yml kafka
 

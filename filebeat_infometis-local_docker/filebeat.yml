@@ -1,4 +1,4 @@
-name: filbeat_infometis-local_docker
+#name: filbeat_infometis-local_docker
 
 #filebeat.inputs:
 #- type: docker

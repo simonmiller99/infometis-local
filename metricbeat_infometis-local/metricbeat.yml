@@ -9,7 +9,7 @@
 
 #==========================  Modules configuration ============================
 
-name: POTF_KPN_metricbeat
+#name: POTF_KPN_metricbeat
 
 metricbeat.modules:
 
