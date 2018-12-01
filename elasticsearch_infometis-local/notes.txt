@@ -1,0 +1,4 @@
+
+the following setting must be done on linux:
+vm.max_map_count=262144
+with sysctl -w or in file /etc/sysctl.conf

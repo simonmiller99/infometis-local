@@ -1,0 +1,29 @@
+---
+version: '3'
+services:
+  local:
+    image: vc11web/streamsets:infometis-local_v1_cc
+    hostname: streamsets-local
+    ports:
+      - '18631:18630'
+    command: --base dc
+    environment:
+      SDC_JAVA_OPTS: "-Xmx512m -Xms512m "
+    networks: 
+      - infometis
+
+
+  dev:
+    image: vc11web/streamsets:infometis-local_v1_dev_cc
+    hostname: streamsets
+    ports:
+      - '18630:18630'
+    command: --base dc
+    environment:
+      SDC_JAVA_OPTS: "-Xmx512m -Xms512m "
+    networks: 
+      - infometis
+
+networks:
+  infometis:
+    external: true

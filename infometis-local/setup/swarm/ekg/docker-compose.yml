@@ -1,0 +1,43 @@
+---
+version: '3'
+services:
+  elasticsearch:
+    image: vc11web/elasticsearch:infometis-local_v1_cc
+    hostname: elasticsearch
+    environment:
+      - clustername=infometis-local
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    networks: 
+      - infometis
+
+
+  kibana:
+    image: vc11web/kibana:infometis-local_v1
+    hostname: kibana
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    networks: 
+      - infometis
+
+
+  grafana:
+    image: vc11web/grafana:infometis-local_v1
+    hostname: grafana
+    environment:
+      GF_LOG_FORMAT: json
+      GF_LOG_FILE_FORMAT: json
+      GF_LOG_CONSOLE_FORMAT: json
+      GF_LOG_SYSLOG_FORMAT: json
+      GF_LOG_LEVEL: warn
+    ports:
+      - 3000:3000
+    networks: 
+      - infometis
+
+networks:
+  infometis:
+    external: true
