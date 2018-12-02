@@ -9,7 +9,7 @@
 
 #==========================  Modules configuration ============================
 
-#name: POTF_KPN_metricbeat
+name: POTF_KPN_metricbeat
 
 metricbeat.modules:
 
@@ -40,7 +40,7 @@ metricbeat.modules:
 - module: kafka
   metricsets: ["consumergroup","partition"]
   period: 60s
-  hosts: ["kafka:9092"]
+  hosts: ["kafka:29092"]
 
 - module: system
   period: 1m
