@@ -27,7 +27,7 @@ Import the pipelines from the _streamsets_ folder into streamsets (port 18630).
 ```bash
 docker commit elasticsearch vc11web/elasticsearch:infometis-local_v1_cc
 docker commit streamsets-local vc11web/streamsets:infometis-local_v1_cc
-docker commit streamsets-local vc11web/streamsets:infometis-local_v1_dev_cc
+docker commit streamsets vc11web/streamsets:infometis-local_v1_dev_cc
 ```
 
 ### Bring the Stack down
