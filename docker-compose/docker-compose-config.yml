@@ -2,7 +2,7 @@
 version: '3'
 services:
   zookeeper:
-    image: ${registry}/zookeeper:${solutionName}_${solutionVersion}
+    image: ${registry}/zookeeper:base
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -12,7 +12,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: ${registry}/kafka:${solutionName}_${solutionVersion}
+    image: ${registry}/kafka:base
     hostname: kafka
     container_name: kafka
     ports:
@@ -35,7 +35,7 @@ services:
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
 
   kafka-manager:
-    image: ${registry}/kafka-manager:${solutionName}_${solutionVersion}
+    image: ${registry}/kafka-manager:base
     hostname: kafka-manager
     container_name: kafka-manager
     ports:
@@ -45,30 +45,8 @@ services:
       APPLICATION_SECRET: letmein
       KM_ARGS: -Djava.net.preferIPv4Stack=true
 
-  filebeat-docker:
-    image: ${registry}/filebeat:${solutionName}_${solutionVersion}_docker
-    hostname: filebeat-docker
-    container_name: filebeat-docker
-    command: filebeat -e -strict.perms=false
-    volumes:
-      - /var/lib/docker/containers:/hostfs/var/lib/docker/containers:rw
-    environment:
-      NO_PROXY: "elasticsearch, kafka"
-      no_proxy: "elasticsearch, kafka"
-
-  metricbeat-local:
-    image: ${registry}/metricbeat:${solutionName}_${solutionVersion}
-    hostname: metricbeat-local
-    container_name: metricbeat-local
-    command: metricbeat -e -strict.perms=false
-    environment:
-      NO_PROXY: "elasticsearch, kafka"
-      no_proxy: "elasticsearch, kafka"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-
   streamsets-local:
-    image: ${registry}/streamsets:${solutionName}_${solutionVersion}_cc
+    image: ${registry}/streamsets:base
     hostname: streamsets-local
     container_name: streamsets-local
     ports:
@@ -82,7 +60,7 @@ services:
       no_proxy: "elasticsearch, kafka, kafka-connect-ui"
 
   streamsets:
-    image: ${registry}/streamsets:${solutionName}_${solutionVersion}_dev_cc
+    image: ${registry}/streamsets:base
     hostname: streamsets
     container_name: streamsets
     ports:
@@ -96,7 +74,7 @@ services:
       no_proxy: "elasticsearch, kafka, kafka-connect-ui"
 
   elasticsearch:
-    image: ${registry}/elasticsearch:${solutionName}_${solutionVersion}_cc
+    image: ${registry}/elasticsearch:base
     hostname: elasticsearch
     container_name: elasticsearch
     environment:
@@ -112,7 +90,7 @@ services:
       - 9300:9300
 
   kibana:
-    image: ${registry}/kibana:${solutionName}_${solutionVersion}
+    image: ${registry}/kibana:base
     hostname: kibana
     container_name: kibana
     environment:
@@ -121,7 +99,7 @@ services:
       - 5601:5601
 
   grafana:
-    image: ${registry}/grafana:${solutionName}_${solutionVersion}
+    build: ./grafana_${solutionName}
     hostname: grafana
     container_name: grafana
     environment:

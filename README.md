@@ -7,5 +7,5 @@ It feature a single node docker-compose with matching single node swarm stacks.
 ## Usage
 An experimental platform for stream processing.
 
-## Build and Test
-Instantiate the configuration docker-compose, configure ElasticSearch and Streamsets, build the configured images and run the docker-compose.
+## Build and Run
+Follow the INSTRUCTIONS.md page for build and run instructions.
