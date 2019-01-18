@@ -3,11 +3,13 @@
 ## Configuration of the Stack
 
 ### Instantiate the Config Stack
+
 ```bash
 docker-compose -f docker-compose-config.yml up -d
 ```
 
 ### Import into Kibana and Streamsets
+
 Import the saved objects from the kibana folder.
 
 Import the pipelines from the streamsets_infometis-local folder into streamsets-local (port 18631).
@@ -58,7 +60,7 @@ docker-compose logs -f streamsets
 docker-compose down
 ```
 
-# Additional Commands
+## Additional Commands
 
 ```bash
 # List the Docker Compose stack
