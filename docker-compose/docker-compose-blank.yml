@@ -46,7 +46,7 @@ services:
       KM_ARGS: -Djava.net.preferIPv4Stack=true
 
   filebeat-docker:
-    build: ./filebeat_${solutionName}_docker
+    build: ./filebeat
     hostname: filebeat-docker
     container_name: filebeat-docker
     command: filebeat -e -strict.perms=false
@@ -57,7 +57,7 @@ services:
       no_proxy: "elasticsearch, kafka"
 
   metricbeat-local:
-    build: ./metricbeat_${solutionName}
+    build: ./metricbeat
     hostname: metricbeat-local
     container_name: metricbeat-local
     command: metricbeat -e -strict.perms=false
@@ -121,7 +121,7 @@ services:
       - 5601:5601
 
   grafana:
-    build: ./grafana_${solutionName}
+    build: ./grafana
     hostname: grafana
     container_name: grafana
     environment:
