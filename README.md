@@ -1,5 +1,7 @@
 # InfoMetis Local Self Monitoring Processing Stack
 
+For more information on the container wrapper functionality, see _CONTAINER-WRAPPER.md_.
+
 ## Purpose
 
 This project creates a self-monitoring stack of infometis, an integration of Kafka, StreamSets, ElasticSearch with Kibana and Grafana.
