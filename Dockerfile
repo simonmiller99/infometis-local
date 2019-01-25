@@ -9,9 +9,14 @@ ARG IMAGE=infometis-local:v1
 ARG LABELNAMESPACE=io.vcweb
 
 ENV containerImage "$REGISTRY/$IMAGE"
-ENV imageBase "$REGISTRY/$BASE"
+ENV imageComponent "$IMAGE"
+ENV imageBase "$BASE"
+ENV imageWrapper "$REGISTRY/$BASE"
 
-RUN mkdir -p /container-wrapper/setup/docker-compose/
+RUN mv /container-wrapper/docs/README.md /container-wrapper/docs/CONTAINER-WRAPPER.md
+
+COPY ./README.md /container-wrapper/docs/README.md
+COPY ./Dockerfile /container-wrapper/setup/docker/Dockerfile
 COPY ./docker-compose/ /container-wrapper/setup/docker-compose/
 COPY ./docs/ /container-wrapper/docs/
 COPY ./README.md /container-wrapper/docs/README.md
