@@ -15,11 +15,11 @@ ENV imageWrapper "$REGISTRY/$BASE"
 
 RUN mv /container-wrapper/docs/README.md /container-wrapper/docs/CONTAINER-WRAPPER.md
 
-COPY ./README.md /container-wrapper/docs/README.md
-COPY ./Dockerfile /container-wrapper/setup/docker/Dockerfile
-COPY ./docker-compose/ /container-wrapper/setup/docker-compose/
 COPY ./docs/ /container-wrapper/docs/
 COPY ./README.md /container-wrapper/docs/README.md
+COPY ./Dockerfile /container-wrapper/setup/docker/Dockerfile
+
+COPY ./docker-compose/ /container-wrapper/setup/docker-compose/
        
 LABEL $LABELNAMESPACE.schema-version="1.0"
 LABEL $LABELNAMESPACE.name="Infometis Local"
